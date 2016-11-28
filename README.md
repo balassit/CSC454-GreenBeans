@@ -8,6 +8,9 @@ CSC 454 Human Computer Interaction Project
 2. Segmented Radio Button Implementation
   - https://github.com/vinc3m1/android-segmentedradiobutton
 
+3. Reference for android app
+  - https://github.com/balassit/attendance
+
 ## New activity files:
 To look at the format of the new activity.xml file, go to Android Studio and use the view "Design". This is also helpful for modifying the format when there are major adjustments to make. The "Text" view is helpful once you understand what is required for each xml file.
 
