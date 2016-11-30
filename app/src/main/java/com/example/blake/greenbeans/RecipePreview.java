@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Recipe} subclass.
  * Activities that contain this fragment must implement the
  * {@link RecipePreview.OnFragmentInteractionListener} interface
  * to handle interaction events.

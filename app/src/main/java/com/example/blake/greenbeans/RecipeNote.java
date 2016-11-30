@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Recipe} subclass.
  * Use the {@link RecipeNote#newInstance} factory method to
  * create an instance of this fragment.
  */
