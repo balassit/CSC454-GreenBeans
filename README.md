@@ -14,3 +14,6 @@ To look at the format of the new activity.xml file, go to Android Studio and use
 3. Each activity has supporting java files
   - Java files will contain the strings and lists data that the activity receives. 
 
+
+Hal: see this for linking the fragment activity files into a layout
+https://developer.android.com/training/basics/fragments/creating.html
