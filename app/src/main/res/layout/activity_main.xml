@@ -90,4 +90,14 @@
         android:layout_toLeftOf="@+id/btnNotes"
         android:layout_toStartOf="@+id/btnNotes" />
 
+    <org.nairteashop.SegmentedControl
+        android:id="@+id/segmented_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <org.nairteashop.SegmentedControlButton android:id="@+id/opt_1" android:text="@string/label_1" />
+        <org.nairteashop.SegmentedControlButton android:id="@+id/opt_2" android:text="@string/label_2" />
+    </org.nairteashop.SegmentedControl>
+
 </RelativeLayout>
