@@ -12,10 +12,9 @@ public class Recipe {
 
     String title;
     String description;
-    String time;
-    ArrayList<String> ingredients;
+    ArrayList<Ingredient> ingredients;
     ArrayList<String> equipment;
-    ArrayList<String> directions;
+    ArrayList<Direction> directions;
     int rating;
     String notes;
     Image img;
@@ -23,7 +22,6 @@ public class Recipe {
     public Recipe() {
         this.title = null;
         this.description = null;
-        this.time = null;
         this.rating = 0;
         this.notes = null;
         this.img = null;
@@ -32,10 +30,9 @@ public class Recipe {
         this.directions = new ArrayList<>();
     }
 
-    public Recipe(String title, String description, String time, String notes, int rating, Image img, ArrayList<String> ingredients, ArrayList<String> equipment, ArrayList<String> directions) {
+    public Recipe(String title, String description,String notes, int rating, Image img, ArrayList<Ingredient> ingredients, ArrayList<String> equipment, ArrayList<Direction> directions) {
         this.title = title;
         this.description = description;
-        this.time = time;
         this.notes = notes;
         this.rating = rating;
         this.img = img;
@@ -43,6 +40,9 @@ public class Recipe {
         this.equipment = equipment;
         this.directions = directions;
 
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTitle() {
@@ -53,11 +53,8 @@ public class Recipe {
         return description;
     }
 
-    public String getTime() {
-        return time;
-    }
 
-    public ArrayList<String> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
@@ -65,8 +62,22 @@ public class Recipe {
         return equipment;
     }
 
-    public ArrayList<String> getDirections() {
+    public ArrayList<Direction> getDirections() {
         return directions;
     }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public String getNotes() {
+
+        return notes;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
 
 }
