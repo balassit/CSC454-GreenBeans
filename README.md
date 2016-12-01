@@ -6,6 +6,7 @@ CSC 454 Human Computer Interaction Project
   - This will help download Android Studio and a lot of views for how to work with the activites and classes within a project. Just search around as you need because it would take forever to actually do the training completely.
 
 2. Segmented Radio Button Implementation
+  - https://github.com/nairteashop/SegmentedControl
   - https://github.com/vinc3m1/android-segmentedradiobutton
 
 3. Reference for android app
