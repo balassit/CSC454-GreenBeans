@@ -4,14 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by blake on 11/23/16.
@@ -21,6 +27,10 @@ public class MealCheckout extends AppCompatActivity {
 
     String ActivityResult;
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> recipeList = new ArrayList<String>();
+    private ArrayList<Meal> mealList = new ArrayList<Meal>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,32 @@ public class MealCheckout extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        listView = (ListView) findViewById(R.id.meal);
+
+
+        updateRecipeList();
+
+        //Create list of Recipes
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
+        listView.setAdapter(adapter);
+    }
+
+    //update Recipe List with new recipe
+    private void updateRecipeList(){
+        if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+            ArrayList<Meal> temp = getIntent().getParcelableArrayListExtra("mealList");
+            for(int i = 0; i < temp.size(); i++){
+                //duplicates allowed
+                mealList.add(temp.get(i));
+                recipeList.add(temp.get(i).getRecipe());
+            }
+            //adapter.add(addedRecipe);
+        } else {
+            System.out.println("_________________");
+            System.out.println("NO ITEMS");
+            System.out.println("_________________");
+        }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,6 +88,7 @@ public class MealCheckout extends AppCompatActivity {
                 //setResult(Activity.RESULT_OK, intent);
                //finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
                 return true;
 

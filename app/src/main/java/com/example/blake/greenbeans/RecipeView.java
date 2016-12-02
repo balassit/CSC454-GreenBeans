@@ -3,6 +3,7 @@ package com.example.blake.greenbeans;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by blake on 11/30/16.
@@ -21,8 +24,10 @@ public class RecipeView extends AppCompatActivity {
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
     private static final int REQUEST_CODE_CHECK_OUT = 200;
     private static final int REQUEST_CODE_VIEW_RECIPE = 300;
+    private static final int REQUEST_CODE_ADD_RECIPE = 400;
+    private ArrayList<Meal> mealList;
     private TextView mealTitle;
-    private Button button;
+    private Button btnAddToMeal;
     String name;
 
     @Override
@@ -32,22 +37,42 @@ public class RecipeView extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // add back arrow to toolbar
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        mealTitle = (TextView)findViewById(R.id.mealTitle);
+
+        //Set Meal title to name of recipe
+        mealTitle = (TextView) findViewById(R.id.mealTitle);
         name = getIntent().getStringExtra("name");
+        mealList = getIntent().getParcelableArrayListExtra("mealList");
         mealTitle.setText(name);
         System.out.println("_____________________");
         System.out.println(name);
         System.out.println("_____________________");
+
+        //Pass recipe name on add to meal click
+        btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
+        btnAddToMeal.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                if(mealList == null){
+                    mealList = new ArrayList<Meal>();
+                }
+                Meal meal = new Meal();
+                meal.setQuantity(1);
+                meal.setRecipe(name);
+                mealList.add(meal);
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                startActivityForResult(intent, REQUEST_CODE_ADD_RECIPE);
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         new MenuInflater(this).inflate(R.menu.option, menu);
 
-        return(super.onCreateOptionsMenu(menu));
+        return (super.onCreateOptionsMenu(menu));
     }
 
     @Override
@@ -58,6 +83,7 @@ public class RecipeView extends AppCompatActivity {
                 // User chose the "Home" item, go to home
                 Intent intent = new Intent();
                 intent.putExtra("ActivityResult", getIntent().getStringExtra("name"));
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 //startActivity(new Intent(RecipeView.this, RecipeList.class));
@@ -70,6 +96,7 @@ public class RecipeView extends AppCompatActivity {
                 //setResult(Activity.RESULT_OK, intent2);
                 //startActivity(intent2);
                 Intent intent2 = new Intent(getApplicationContext(), MealCheckout.class);
+                intent2.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 startActivityForResult(intent2, REQUEST_CODE_CHECK_OUT);
                 return true;
             default:
@@ -84,6 +111,7 @@ public class RecipeView extends AppCompatActivity {
      * Need to load the correct reciepe data based on which item was clicked from the recipe list.
      * the "name" from the data is the name of the recipe. Using this we can display the correct information.
      * Need to call methods from Recipe to set and get recipe data.
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -94,6 +122,8 @@ public class RecipeView extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_VIEW_RECIPE:
                 if (resultCode == RESULT_OK) {
+                    Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                    intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                     mealTitle.setText(data.getStringExtra("name"));
                 } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
@@ -102,7 +132,8 @@ public class RecipeView extends AppCompatActivity {
                 break;
             case REQUEST_CODE_CHECK_OUT:
                 if (resultCode == RESULT_OK) {
-                    //GO TO CHECKOUT?
+                    Intent intent2 = new Intent(getApplicationContext(), MealCheckout.class);
+                    intent2.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
                 }
@@ -112,7 +143,7 @@ public class RecipeView extends AppCompatActivity {
     //on add to meal-->update the meal with that number and go back to recipe list? or stay there
 
     private void addToMeal() {
-        button.setOnClickListener(new View.OnClickListener() {
+        btnAddToMeal.setOnClickListener(new View.OnClickListener() {
             //how can i carry the total number of this meal into the page?
             //need to add the current recipe.
             //the recipe view has to use the recipe information
@@ -141,7 +172,7 @@ public class RecipeView extends AppCompatActivity {
         Recipe chicken = new Recipe();
         Recipe carrots = new Recipe();
         Recipe milk = new Recipe();
-        Meal meal = new Meal(1, chicken);
+        //Meal meal = new Meal(1, chicken);
     }
 
 }

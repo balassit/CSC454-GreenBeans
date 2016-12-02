@@ -2,6 +2,7 @@ package com.example.blake.greenbeans;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private static final int REQUEST_CODE_CHECK_OUT = 200;
     private static final int REQUEST_CODE_VIEW_RECIPE = 300;
+    private ArrayList<Meal> mealList = new ArrayList<Meal>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        mealList = getIntent().getParcelableArrayListExtra("mealList");
         //set the names of the recipes
         setRecipes();
         //display list of recipes
@@ -63,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.checkout:
                 // User chose the "Checkout" action
                 Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                System.out.println("");
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 startActivityForResult(intent, REQUEST_CODE_CHECK_OUT);
                 return true;
 
@@ -84,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             //go to recipe with name of recipe
             Intent intent = new Intent(getApplicationContext(), RecipeView.class);
             intent.putExtra("name", textView.getText().toString());
+            intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
             startActivityForResult(intent, REQUEST_CODE_VIEW_RECIPE);
         }
     }
