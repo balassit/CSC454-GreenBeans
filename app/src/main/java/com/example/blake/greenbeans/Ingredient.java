@@ -31,8 +31,11 @@ public class Ingredient implements Parcelable {
     }
 
 
-    public Ingredient(String quantity, String name, String unit) {
-        this.quantity = quantity;
+    public Ingredient(double quantity, String name, String unit) {
+        this.quantity = "0";
+        if(quantity > 0) {
+            this.quantity = Double.toString(quantity);
+        }
         this.name = unit;
         this.unit = name;
     }
