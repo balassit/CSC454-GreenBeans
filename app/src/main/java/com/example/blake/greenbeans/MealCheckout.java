@@ -18,6 +18,8 @@ import android.widget.Toast;
  */
 
 public class MealCheckout extends AppCompatActivity {
+
+    String ActivityResult;
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
 
     @Override
@@ -45,9 +47,14 @@ public class MealCheckout extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home:
                 // User chose the "Home" item, go to home
-                Intent intent = new Intent(getApplicationContext(), RecipeList.class);
+                //Intent intent = new Intent();
+                //intent.putExtra("ActivityResult", getIntent().getStringExtra("name"));
+                //setResult(Activity.RESULT_OK, intent);
+               //finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
-                // return true;
+                return true;
+
 
             case R.id.checkout:
                 // User chose the "Checkout" action

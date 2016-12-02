@@ -1,5 +1,6 @@
 package com.example.blake.greenbeans;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -48,16 +49,22 @@ public class RecipeView extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home:
                 // User chose the "Home" item, go to home
-                startActivity(new Intent(RecipeView.this, RecipeList.class));
-                //finish();
+                Intent intent = new Intent();
+                intent.putExtra("ActivityResult", getIntent().getStringExtra("name"));
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                //startActivity(new Intent(RecipeView.this, RecipeList.class));
                 return true;
 
             case R.id.checkout:
                 // User chose the "Checkout" action
-                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
-                startActivityForResult(intent, REQUEST_CODE_CHECK_OUT);
+                //Intent intent2 = new Intent();
+                //intent2.putExtra("ActivityResult", getIntent().getStringExtra("name"));
+                //setResult(Activity.RESULT_OK, intent2);
+                //startActivity(intent2);
+                Intent intent2 = new Intent(getApplicationContext(), MealCheckout.class);
+                startActivityForResult(intent2, REQUEST_CODE_CHECK_OUT);
                 return true;
-
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

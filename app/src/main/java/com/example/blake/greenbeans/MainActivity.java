@@ -1,5 +1,6 @@
 package com.example.blake.greenbeans;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             //go to recipe with name of recipe
             Intent intent = new Intent(getApplicationContext(), RecipeView.class);
             intent.putExtra("name", textView.getText().toString());
-            setResult(RESULT_CANCELED, intent);
             startActivityForResult(intent, REQUEST_CODE_VIEW_RECIPE);
         }
     }
@@ -105,5 +105,20 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listRecipes);
         String[] items = {"Apple", "banana", "grape"};
         recipes = new ArrayList<>(Arrays.asList(items));
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case REQUEST_CODE_CHECK_OUT:
+                if (resultCode == Activity.RESULT_OK) {
+                    data.getStringExtra("result");
+                    //finish?
+                }
+                if (resultCode == Activity.RESULT_CANCELED) {
+                    //Write your code if there's no result
+                }
+                break;
+        }
     }
 }
