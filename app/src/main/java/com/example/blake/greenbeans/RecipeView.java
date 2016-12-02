@@ -26,6 +26,9 @@ public class RecipeView extends AppCompatActivity {
     private static final int REQUEST_CODE_VIEW_RECIPE = 300;
     private static final int REQUEST_CODE_ADD_RECIPE = 400;
     private ArrayList<Meal> mealList;
+    private ArrayList<Ingredient> ingredientList;
+    private ArrayList<Ingredient> currentIngredients;
+    private ArrayList<String> displayIngredients;
     private TextView mealTitle;
     private Button btnAddToMeal;
     String name;
@@ -41,6 +44,8 @@ public class RecipeView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
         //Set Meal title to name of recipe
         mealTitle = (TextView) findViewById(R.id.mealTitle);
@@ -62,6 +67,7 @@ public class RecipeView extends AppCompatActivity {
                     meal.addToQuantity(1);
                     addEquipment(meal);
                     addSkills(meal);
+                    addIngredients();
                     mealList.add(meal);
                 }
                 else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
@@ -79,11 +85,13 @@ public class RecipeView extends AppCompatActivity {
                         addSkills(meal);
                         meal.addToQuantity(1);
                         mealList.add(meal);
+                        addIngredients();
                     }
                 }
 
 
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 startActivityForResult(intent, REQUEST_CODE_ADD_RECIPE);
             }
         });
@@ -104,6 +112,7 @@ public class RecipeView extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("ActivityResult", getIntent().getStringExtra("name"));
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 //startActivity(new Intent(RecipeView.this, RecipeList.class));
@@ -117,6 +126,7 @@ public class RecipeView extends AppCompatActivity {
                 //startActivity(intent2);
                 Intent intent2 = new Intent(getApplicationContext(), MealCheckout.class);
                 intent2.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                intent2.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 startActivityForResult(intent2, REQUEST_CODE_CHECK_OUT);
                 return true;
             default:
@@ -144,6 +154,7 @@ public class RecipeView extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
                     intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                    intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                     mealTitle.setText(data.getStringExtra("name"));
                 } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
@@ -154,6 +165,7 @@ public class RecipeView extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Intent intent2 = new Intent(getApplicationContext(), MealCheckout.class);
                     intent2.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                    intent2.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
                 }
@@ -198,6 +210,25 @@ public class RecipeView extends AppCompatActivity {
             meal.addToSkills('c');
             meal.addToSkills('a');
         }
+    }
+
+    private void currentIngredients(){
+        if(name.equals("Apple")){
+            Ingredient flour = new Ingredient(3.0, "flour", "cups");
+            currentIngredients.add(flour);
+        } else if(name.equals("banana")){
+            Ingredient water = new Ingredient(5.0, "water", "drops");
+            currentIngredients.add(water);
+        } else if(name.equals("grape")){
+            Ingredient salt = new Ingredient(10.0, "salt", "KILOGRAMS");
+            currentIngredients.add(salt);
+        }
+    }
+
+    private void displayIngredientsOnList(){
+       for(int i = 0; i < currentIngredients.size(); i++){
+           //put into displayIngredients so that it shows up below the recipe
+       }
     }
 
 }

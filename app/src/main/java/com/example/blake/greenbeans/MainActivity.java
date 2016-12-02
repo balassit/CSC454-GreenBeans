@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHECK_OUT = 200;
     private static final int REQUEST_CODE_VIEW_RECIPE = 300;
     private ArrayList<Meal> mealList = new ArrayList<Meal>();
+    private ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         mealList = getIntent().getParcelableArrayListExtra("mealList");
+        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
         //set the names of the recipes
         setRecipes();
         //display list of recipes
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
                 System.out.println("");
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 startActivityForResult(intent, REQUEST_CODE_CHECK_OUT);
                 return true;
 
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), RecipeView.class);
             intent.putExtra("name", textView.getText().toString());
             intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+            intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
             startActivityForResult(intent, REQUEST_CODE_VIEW_RECIPE);
         }
     }
