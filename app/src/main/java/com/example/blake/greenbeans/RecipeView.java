@@ -10,10 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by blake on 11/30/16.
@@ -28,7 +31,9 @@ public class RecipeView extends AppCompatActivity {
     private ArrayList<Meal> mealList;
     private ArrayList<Ingredient> ingredientList;
     private ArrayList<Ingredient> currentIngredients;
-    private ArrayList<String> displayIngredients;
+    private ArrayList<String> displayIngredients =  new ArrayList<String>();
+    private ArrayAdapter<String> adapterIngredients;
+    private ListView listViewIngredients;
     private TextView mealTitle;
     private Button btnAddToMeal;
     String name;
@@ -44,17 +49,11 @@ public class RecipeView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
-
-        //Set Meal title to name of recipe
+                //Set Meal title to name of recipe
         mealTitle = (TextView) findViewById(R.id.mealTitle);
         name = getIntent().getStringExtra("name");
         mealList = getIntent().getParcelableArrayListExtra("mealList");
         mealTitle.setText(name);
-        System.out.println("_____________________");
-        System.out.println(name);
-        System.out.println("_____________________");
 
         //Pass recipe name on add to meal click
         btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
@@ -67,7 +66,8 @@ public class RecipeView extends AppCompatActivity {
                     meal.addToQuantity(1);
                     addEquipment(meal);
                     addSkills(meal);
-                    addIngredients();
+                    //add ingredients to the ingredient that is passed to a new instance
+                    // addIngredients();
                     mealList.add(meal);
                 }
                 else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
@@ -85,10 +85,19 @@ public class RecipeView extends AppCompatActivity {
                         addSkills(meal);
                         meal.addToQuantity(1);
                         mealList.add(meal);
-                        addIngredients();
+                        //add ingredients to the ingredient that is passed to a new instance
+                        // addIngredients();
                     }
                 }
 
+                listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+                //set the current ingredients for recipe
+                createIngredients();
+                //set string for ingredients
+                displayIngredients();
+                adapterIngredients = new ArrayAdapter<String>(getActivtity(), R.layout.list_item, R.id.txtItem, displayIngredients);
+                listViewIngredients.setAdapter(adapterIngredients);
+                ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
@@ -212,7 +221,11 @@ public class RecipeView extends AppCompatActivity {
         }
     }
 
-    private void currentIngredients(){
+    /**
+     * Set the current ingredients for the recipes
+     */
+    private void createIngredients(){
+        currentIngredients = new ArrayList<>();
         if(name.equals("Apple")){
             Ingredient flour = new Ingredient(3.0, "flour", "cups");
             currentIngredients.add(flour);
@@ -225,10 +238,16 @@ public class RecipeView extends AppCompatActivity {
         }
     }
 
-    private void displayIngredientsOnList(){
+    /**
+     * Create a string to go in the list view for each ingredient
+     */
+    private void displayIngredients(){
+        displayIngredients = new ArrayList<>();
        for(int i = 0; i < currentIngredients.size(); i++){
            //put into displayIngredients so that it shows up below the recipe
+           displayIngredients.add(currentIngredients.get(i).getQuantity() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
        }
+        Collections.sort(displayIngredients);
     }
 
 }

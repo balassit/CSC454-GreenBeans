@@ -114,7 +114,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listItemsMeal"
+        android:id="@+id/ingredientList"
         android:isScrollContainer="true"
         android:layout_below="@+id/notes"
         android:layout_alignParentRight="true"

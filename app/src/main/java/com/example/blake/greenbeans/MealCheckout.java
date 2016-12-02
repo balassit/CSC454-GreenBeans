@@ -60,7 +60,6 @@ public class MealCheckout extends AppCompatActivity {
         //Create list of Recipes
         adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
         adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
-        adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
         listViewRecipe.setAdapter(adapterRecipe);
         listViewEquipment.setAdapter(adapterEquipment);
         listViewSkills.setAdapter(adapterSkills);
@@ -70,9 +69,7 @@ public class MealCheckout extends AppCompatActivity {
     private void updateRecipeList(){
             if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
             mealList = getIntent().getParcelableArrayListExtra("mealList");
-            System.out.println("_________________");
             for(int i = 0; i < mealList.size(); i++){
-                System.out.println(mealList.get(i).getQuantity() + " " + mealList.get(i).getRecipe());
                 recipeList.add(mealList.get(i).getRecipe());
                 getEquipmentList(mealList.get(i).getEquipment());
                 getSkillsList(mealList.get(i).getSkills());
@@ -80,13 +77,7 @@ public class MealCheckout extends AppCompatActivity {
             Collections.sort(recipeList);
             Collections.sort(equipmentList);
             Collections.sort(skillsList);
-            System.out.println("_________________");
-        } else {
-            System.out.println("_________________");
-            System.out.println("NO ITEMS");
-            System.out.println("_________________");
         }
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
