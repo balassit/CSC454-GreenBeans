@@ -58,11 +58,31 @@ public class RecipeView extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
                 if(mealList == null){
                     mealList = new ArrayList<Meal>();
+                    Meal meal = new Meal(name);
+                    meal.addToQuantity(1);
+                    addEquipment(meal);
+                    addSkills(meal);
+                    mealList.add(meal);
                 }
-                Meal meal = new Meal();
-                meal.setQuantity(1);
-                meal.setRecipe(name);
-                mealList.add(meal);
+                else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+                    boolean added = false;
+                    for (int i = 0; i < mealList.size(); i++) {
+                        if (mealList.get(i).getRecipe().equals(name)) {
+                            mealList.get(i).addToQuantity(1);
+                            added = true;
+                            break;
+                        }
+                    }
+                    if(!added){
+                        Meal meal = new Meal(name);
+                        addEquipment(meal);
+                        addSkills(meal);
+                        meal.addToQuantity(1);
+                        mealList.add(meal);
+                    }
+                }
+
+
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 startActivityForResult(intent, REQUEST_CODE_ADD_RECIPE);
             }
@@ -156,23 +176,28 @@ public class RecipeView extends AppCompatActivity {
         });
     }
 
-    private void setRecipeViewData() {
-        Recipe r = new Recipe();
-        r.getDescription();
-        r.getDirections();
-        r.getEquipment();
-        r.getImg();
-        r.getIngredients();
-        r.getNotes();
-        r.getRating();
-        r.getTitle();
+    public void addEquipment(Meal meal) {
+        if(name.equals("Apple")){
+            meal.addToEquipment('a');
+            meal.addToEquipment('b');
+        } else if(name.equals("banana")){
+            meal.addToEquipment('b');
+        } else if(name.equals("grape")){
+            meal.addToEquipment('c');
+            meal.addToEquipment('a');
+        }
     }
 
-    private void setRecipes() {
-        Recipe chicken = new Recipe();
-        Recipe carrots = new Recipe();
-        Recipe milk = new Recipe();
-        //Meal meal = new Meal(1, chicken);
+    public void addSkills(Meal meal) {
+        if(name.equals("Apple")){
+            meal.addToSkills('a');
+            meal.addToSkills('b');
+        } else if(name.equals("banana")){
+            meal.addToSkills('b');
+        } else if(name.equals("grape")){
+            meal.addToSkills('c');
+            meal.addToSkills('a');
+        }
     }
 
 }

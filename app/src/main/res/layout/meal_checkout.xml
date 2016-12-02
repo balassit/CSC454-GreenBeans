@@ -64,7 +64,7 @@
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/skillList"
+        android:id="@+id/skillsList"
         android:layout_below="@+id/skill"
         android:isScrollContainer="true"></ListView>
 </LinearLayout>

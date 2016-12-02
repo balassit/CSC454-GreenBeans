@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by blake on 11/23/16.
@@ -27,10 +28,16 @@ public class MealCheckout extends AppCompatActivity {
 
     String ActivityResult;
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
-    private ListView listView;
-    private ArrayAdapter<String> adapter;
+    private ListView listViewRecipe;
+    private ListView listViewEquipment;
+    private ListView listViewSkills;
+    private ArrayAdapter<String> adapterRecipe;
+    private ArrayAdapter<String> adapterEquipment;
+    private ArrayAdapter<String> adapterSkills;
     private ArrayList<String> recipeList = new ArrayList<String>();
-    private ArrayList<Meal> mealList = new ArrayList<Meal>();
+    private ArrayList<Meal> mealList;
+    private ArrayList<String> equipmentList = new ArrayList<String>();
+    private ArrayList<String> skillsList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,26 +50,37 @@ public class MealCheckout extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        listView = (ListView) findViewById(R.id.meal);
+        listViewRecipe = (ListView) findViewById(R.id.meal);
+        listViewEquipment = (ListView) findViewById(R.id.equipmentList);
+        listViewSkills = (ListView) findViewById(R.id.skillsList);
 
 
         updateRecipeList();
 
         //Create list of Recipes
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
-        listView.setAdapter(adapter);
+        adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
+        adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
+        adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
+        listViewRecipe.setAdapter(adapterRecipe);
+        listViewEquipment.setAdapter(adapterEquipment);
+        listViewSkills.setAdapter(adapterSkills);
     }
 
     //update Recipe List with new recipe
     private void updateRecipeList(){
-        if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
-            ArrayList<Meal> temp = getIntent().getParcelableArrayListExtra("mealList");
-            for(int i = 0; i < temp.size(); i++){
-                //duplicates allowed
-                mealList.add(temp.get(i));
-                recipeList.add(temp.get(i).getRecipe());
+            if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+            mealList = getIntent().getParcelableArrayListExtra("mealList");
+            System.out.println("_________________");
+            for(int i = 0; i < mealList.size(); i++){
+                System.out.println(mealList.get(i).getQuantity() + " " + mealList.get(i).getRecipe());
+                recipeList.add(mealList.get(i).getRecipe());
+                getEquipmentList(mealList.get(i).getEquipment());
+                getSkillsList(mealList.get(i).getSkills());
             }
-            //adapter.add(addedRecipe);
+            Collections.sort(recipeList);
+            Collections.sort(equipmentList);
+            Collections.sort(skillsList);
+            System.out.println("_________________");
         } else {
             System.out.println("_________________");
             System.out.println("NO ITEMS");
@@ -121,4 +139,49 @@ public class MealCheckout extends AppCompatActivity {
         }
     }
 
+    private void getEquipmentList(String equipment){
+        if (equipment == null) {
+            return;
+        }
+        char[] list = equipment.toCharArray();
+
+        for(int i = 0; i < list.length; i++) {
+            if(list[i] == 'a') {
+                if(!equipmentList.contains("Stove")){
+                    equipmentList.add("Stove");
+                }
+            } else if(list[i] == 'b') {
+                if(!equipmentList.contains("Oven")){
+                    equipmentList.add("Oven");
+                }
+            } else if(list[i] == 'c') {
+                if(!equipmentList.contains("Pot")){
+                    equipmentList.add("Pot");
+                }
+            }
+        }
+    }
+
+    private void getSkillsList(String skills){
+        if (skills == null) {
+            return;
+        }
+        char[] list = skills.toCharArray();
+
+        for(int i = 0; i < list.length; i++) {
+            if(list[i] == 'a') {
+                if(!skillsList.contains("Stir")){
+                    skillsList.add("Stir");
+                }
+            } else if(list[i] == 'b') {
+                if(!skillsList.contains("mix")){
+                    skillsList.add("mix");
+                }
+            } else if(list[i] == 'c') {
+                if(!skillsList.contains("cut")){
+                    skillsList.add("cut");
+                }
+            }
+        }
+    }
 }

@@ -10,6 +10,8 @@ import android.os.Parcelable;
 public class Meal implements Parcelable {
     private String quantity;
     private String recipe;
+    private String equipment;
+    private String skills;
 
     private int mData;
 
@@ -24,25 +26,75 @@ public class Meal implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringArray(new String[] {this.quantity,
-                this.recipe});
+                this.recipe,
+                this.equipment,
+                this.skills});
     }
 
-    public Meal(){
+    public Meal(String recipe){
         this.quantity = null;
-        this.recipe = null;
+        this.recipe = recipe;
+        this.equipment = null;
+        this.skills = null;
     }
 
     public Meal(String quantity, String recipe) {
         this.quantity = quantity;
         this.recipe = recipe;
+        this.equipment = null;
+        this.skills = null;
     }
 
     public int getQuantity() {
+        if(quantity == null){
+            return 0;
+        }
         return Integer.parseInt(quantity);
     }
 
     public String getRecipe() {
         return recipe;
+    }
+
+    public String getEquipment(){
+        return equipment;
+    }
+
+    public String getSkills(){
+        return skills;
+    }
+
+    public String addToEquipment(char a) {
+        if (equipment == null){
+            //check that a is null
+            equipment = Character.toString(a);
+        }
+        else {
+            if(equipment.indexOf(a) >= 0){
+                return equipment;
+            }
+            equipment = equipment.concat(Character.toString(a));
+        }
+
+        return equipment;
+    }
+
+    public String addToSkills(char a) {
+        if (skills == null){
+            //check that a is null
+            skills = Character.toString(a);
+        }
+        else {
+            if(skills.indexOf(a) >= 0){
+                return skills;
+            }
+            skills = skills.concat(Character.toString(a));
+            System.out.println("_____________________");
+            System.out.println("Skills " + skills);
+            System.out.println("_____________________");
+        }
+
+        return skills;
     }
 
     /**
@@ -77,17 +129,15 @@ public class Meal implements Parcelable {
         }
     }
 
-    public void setRecipe(String recipe) {
-        this.recipe = recipe;
-    }
-
     // Parcelling part
     public Meal(Parcel in){
-        String[] data = new String[2];
+        String[] data = new String[4];
 
         in.readStringArray(data);
         this.quantity = data[0];
         this.recipe = data[1];
+        this.equipment = data[2];
+        this.skills = data[3];
     }
 
 
