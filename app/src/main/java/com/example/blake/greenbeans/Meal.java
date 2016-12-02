@@ -51,8 +51,11 @@ public class Meal implements Parcelable {
      */
     public void addToQuantity(int quantity) {
         if(quantity > 0){
-            int temp = Integer.parseInt(this.quantity);
-            temp+=quantity;
+            int temp = 0;
+            if(this.quantity !=null) {
+                temp = Integer.parseInt(this.quantity);
+            }
+            temp += quantity;
             this.quantity = Integer.toString(temp);
         }
     }
@@ -62,10 +65,15 @@ public class Meal implements Parcelable {
      * @param quantity
      */
     public void deleteFromQuantity(int quantity) {
-        int temp = Integer.parseInt(this.quantity);
-        if(quantity <= temp){
-            temp-=quantity;
-            this.quantity = Integer.toString(temp);
+        if (quantity < 0) {
+            int temp = 0;
+            if (this.quantity != null) {
+                temp = Integer.parseInt(this.quantity);
+                if (quantity <= temp) {
+                    temp -= quantity;
+                }
+                this.quantity = Integer.toString(temp);
+            }
         }
     }
 
