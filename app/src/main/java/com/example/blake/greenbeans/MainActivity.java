@@ -23,19 +23,14 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> recipes;
     private ArrayAdapter<String> adapter;
     private ListView listView;
-    private static final int REQUEST_CODE_VIEW_RECIPE = 1;
+    private static final int REQUEST_CODE_CHECK_OUT = 200;
+    private static final int REQUEST_CODE_VIEW_RECIPE = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_list);
-        listView = (ListView) findViewById(R.id.listRecipes);
-        String[] items = {"Apple", "banana", "grape"};
-        recipes = new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipes);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new ItemList());
-
+        //set up the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // add back arrow to toolbar
@@ -43,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        //set the names of the recipes
+        setRecipes();
+        //display list of recipes
+        displayList();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.checkout:
                 // User chose the "Checkout" action
-                startActivity(new Intent(MainActivity.this, MealCheckout.class));
+                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                startActivityForResult(intent, REQUEST_CODE_CHECK_OUT);
                 return true;
 
             default:
@@ -85,5 +86,24 @@ public class MainActivity extends AppCompatActivity {
             setResult(RESULT_CANCELED, intent);
             startActivityForResult(intent, REQUEST_CODE_VIEW_RECIPE);
         }
+    }
+
+    /**
+     * set up itesm from list.
+     * if item is clicked the setOnItemClickListener will take content to RecipeView
+     */
+    private void displayList() {
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipes);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new ItemList());
+    }
+
+    /**
+     * Set the names of the recipes a user can select.
+     */
+    private void setRecipes(){
+        listView = (ListView) findViewById(R.id.listRecipes);
+        String[] items = {"Apple", "banana", "grape"};
+        recipes = new ArrayList<>(Arrays.asList(items));
     }
 }

@@ -45,6 +45,35 @@ public class Recipe {
         this.title = title;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setNotes(String Notes) {
+        this.notes = notes;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setDirections(ArrayList<Direction> directions) {
+        this.directions = directions;
+    }
+
+    public void setEquipment(ArrayList<String> equipment) {
+
+        this.equipment = equipment;
+    }
+
     public String getTitle() {
         return title;
     }

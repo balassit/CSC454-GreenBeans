@@ -9,4 +9,6 @@
     <string name="search_hint">search</string>
     <string name="home">Home</string>
     <string name="checkout">checkout</string>
+    <string name="equipment">Equipment</string>
+    <string name="skills">Skills</string>
 </resources>

@@ -5,7 +5,7 @@ package com.example.blake.greenbeans;
  */
 
 public class Meal {
-    private final int quantity;
+    private int quantity;
     private final Recipe recipe;
 
     public Meal(int quantity, Recipe recipe) {
@@ -19,5 +19,17 @@ public class Meal {
 
     public Recipe getRecipe() {
         return recipe;
+    }
+
+    /**
+     * Change how many of the recipe are in this meal
+     * @param quantity
+     */
+    public void updateQuantity(int quantity) {
+        if(quantity > 0)
+            this.quantity = quantity;
+        else {
+            quantity = 0;
+        }
     }
 }

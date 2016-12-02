@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -15,9 +17,11 @@ import android.widget.TextView;
 
 public class RecipeView extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_VIEW_RECIPE = 2;
+    private static final int REQUEST_CODE_RECIPE_LIST = 100;
+    private static final int REQUEST_CODE_CHECK_OUT = 200;
+    private static final int REQUEST_CODE_VIEW_RECIPE = 300;
     private TextView nameView;
-
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,8 @@ public class RecipeView extends AppCompatActivity {
 
             case R.id.checkout:
                 // User chose the "Checkout" action
-                startActivity(new Intent(RecipeView.this, MealCheckout.class));
+                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                startActivityForResult(intent, REQUEST_CODE_CHECK_OUT);
                 return true;
 
             default:
@@ -76,14 +81,53 @@ public class RecipeView extends AppCompatActivity {
             case REQUEST_CODE_VIEW_RECIPE:
                 if (resultCode == RESULT_OK) {
                     nameView.setText(data.getStringExtra("name"));
-                }
-                if (resultCode == RESULT_CANCELED) {
+                } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
                 }
+
                 break;
+            case REQUEST_CODE_CHECK_OUT:
+                if (resultCode == RESULT_OK) {
+                    //GO TO CHECKOUT?
+                } else if (resultCode == RESULT_CANCELED) {
+                    //Write your code if there's no result
+                }
         }
     }
 
+    //on add to meal-->update the meal with that number and go back to recipe list? or stay there
 
+    private void addToMeal() {
+        button.setOnClickListener(new View.OnClickListener() {
+            //how can i carry the total number of this meal into the page?
+            //need to add the current recipe.
+            //the recipe view has to use the recipe information
+            @Override
+            public void onClick(View v) {
+                //Meal meal = new Meal(1, )
+                Intent intent = new Intent(getApplicationContext(), RecipeList.class);
+                startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
+            }
+        });
+    }
+
+    private void setRecipeViewData() {
+        Recipe r = new Recipe();
+        r.getDescription();
+        r.getDirections();
+        r.getEquipment();
+        r.getImg();
+        r.getIngredients();
+        r.getNotes();
+        r.getRating();
+        r.getTitle();
+    }
+
+    private void setRecipes() {
+        Recipe chicken = new Recipe();
+        Recipe carrots = new Recipe();
+        Recipe milk = new Recipe();
+        Meal meal = new Meal(1, chicken);
+    }
 
 }
