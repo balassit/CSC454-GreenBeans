@@ -7,17 +7,42 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String> recipes;
+    private ArrayAdapter<String> adapter;
+    private ListView listView;
+    private static final int REQUEST_CODE_VIEW_RECIPE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.recipe_list);
+        listView = (ListView) findViewById(R.id.listRecipes);
+        String[] items = {"Apple", "banana", "grape"};
+        recipes = new ArrayList<>(Arrays.asList(items));
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipes);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new ItemList());
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,6 +69,21 @@ public class MainActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
+        }
+    }
+
+    class ItemList implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            ViewGroup viewGroup = (ViewGroup)view;
+            TextView textView = (TextView) viewGroup.findViewById(R.id.txtItem);
+            //Toast.makeText(MainActivity.this, textView.getText().toString(), Toast.LENGTH_SHORT).show();
+            //go to recipe with name of recipe
+            Intent intent = new Intent(getApplicationContext(), RecipeView.class);
+            intent.putExtra("name", textView.getText().toString());
+            setResult(RESULT_CANCELED, intent);
+            startActivityForResult(intent, REQUEST_CODE_VIEW_RECIPE);
         }
     }
 }

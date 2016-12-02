@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/meal_checkout"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.blake.greenbeans.MainActivity">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -20,85 +19,12 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imageView"
-        android:layout_below="@+id/mealTitle"
-        android:layout_alignLeft="@+id/mealTime"
-        android:layout_alignStart="@+id/mealTime" />
-
-    <TextView
-        android:text="@string/mealDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/mealDescription"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textAlignment="viewStart"
-        android:gravity="start"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="@string/minutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:id="@+id/mealTime"
-        android:layout_below="@+id/mealDescription"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <Button
-        android:text="Add to Meal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAddToMeal"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_below="@+id/mealTime"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/listItemsMeal"
-        android:layout_below="@+id/btnNotes"></ListView>
+        android:id="@+id/listRecipes"
+        android:layout_below="@+id/search"></ListView>
 
-    <Button
-        android:text="Notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnNotes"
-        android:layout_below="@+id/btnAddToMeal"
-        android:layout_alignRight="@+id/mealTitle"
-        android:layout_alignEnd="@+id/mealTitle" />
-
-    <Button
-        android:text="Details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDetails"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_alignBaseline="@+id/btnNotes"
-        android:layout_alignBottom="@+id/btnNotes"
-        android:layout_toLeftOf="@+id/btnNotes"
-        android:layout_toStartOf="@+id/btnNotes" />
-
-    <TextView
-        android:text="Meal Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mealTitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
-
-</RelativeLayout>
+</LinearLayout>

@@ -38,6 +38,9 @@
             android:value=".SearchableActivity" />
         </activity>
 
+        <activity android:name=".RecipeView" >
+            </activity>
+
     </application>
 
 </manifest>

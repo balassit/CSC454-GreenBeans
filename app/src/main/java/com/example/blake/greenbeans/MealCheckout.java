@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by blake on 11/23/16.
@@ -20,6 +21,11 @@ public class MealCheckout extends AppCompatActivity {
         setContentView(R.layout.meal_checkout);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,8 +40,9 @@ public class MealCheckout extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home:
                 // User chose the "Home" item, go to home
-                startActivity(new Intent(MealCheckout.this, MainActivity.class));
-                return true;
+                //startActivity(new Intent(MealCheckout.this, RecipeList.class));
+                finish();
+                // return true;
 
             case R.id.checkout:
                 // User chose the "Checkout" action
@@ -48,4 +55,6 @@ public class MealCheckout extends AppCompatActivity {
 
         }
     }
+
+
 }
