@@ -21,8 +21,9 @@ public class RecipeView extends AppCompatActivity {
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
     private static final int REQUEST_CODE_CHECK_OUT = 200;
     private static final int REQUEST_CODE_VIEW_RECIPE = 300;
-    private TextView nameView;
+    private TextView mealTitle;
     private Button button;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,12 @@ public class RecipeView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        mealTitle = (TextView)findViewById(R.id.mealTitle);
+        name = getIntent().getStringExtra("name");
+        mealTitle.setText(name);
+        System.out.println("_____________________");
+        System.out.println(name);
+        System.out.println("_____________________");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,7 +94,7 @@ public class RecipeView extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_VIEW_RECIPE:
                 if (resultCode == RESULT_OK) {
-                    nameView.setText(data.getStringExtra("name"));
+                    mealTitle.setText(data.getStringExtra("name"));
                 } else if (resultCode == RESULT_CANCELED) {
                     //Write your code if there's no result
                 }
