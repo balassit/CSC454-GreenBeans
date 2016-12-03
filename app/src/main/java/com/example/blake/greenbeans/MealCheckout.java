@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ public class MealCheckout extends AppCompatActivity {
 
 
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
+    private static final int REQUEST_CODE_CHECKOUT = 500;
+
     private ListView listViewRecipe;
     private ListView listViewEquipment;
     private ListView listViewSkills;
@@ -38,6 +41,8 @@ public class MealCheckout extends AppCompatActivity {
     private ArrayList<Meal> mealList;
     private ArrayList<String> equipmentList = new ArrayList<String>();
     private ArrayList<String> skillsList = new ArrayList<String>();
+    private Button btnCheckout;
+    private ArrayList<Ingredient> ingredientList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,20 @@ public class MealCheckout extends AppCompatActivity {
         listViewRecipe.setAdapter(adapterRecipe);
         listViewEquipment.setAdapter(adapterEquipment);
         listViewSkills.setAdapter(adapterSkills);
+
+        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
+        //Pass recipe name on add to meal click
+        btnCheckout = (Button) findViewById(R.id.btnCheckout);
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Cooking.class);
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
+                startActivityForResult(intent, REQUEST_CODE_CHECKOUT);
+
+
+            }
+        });
     }
 
     //update Recipe List with new recipe
@@ -99,6 +118,7 @@ public class MealCheckout extends AppCompatActivity {
                //finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                getIntent().getParcelableArrayListExtra("ingredientList");
                 startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
                 return true;
 
