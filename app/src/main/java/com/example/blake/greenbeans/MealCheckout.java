@@ -75,9 +75,9 @@ public class MealCheckout extends AppCompatActivity {
                 getEquipmentList(mealList.get(i).getEquipment());
                 getSkillsList(mealList.get(i).getSkills());
             }
-            Collections.sort(recipeList);
-            Collections.sort(equipmentList);
-            Collections.sort(skillsList);
+            Collections.sort(recipeList, String.CASE_INSENSITIVE_ORDER);
+            Collections.sort(equipmentList, String.CASE_INSENSITIVE_ORDER);
+            Collections.sort(skillsList, String.CASE_INSENSITIVE_ORDER);
         }
     }
 
