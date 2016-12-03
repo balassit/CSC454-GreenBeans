@@ -63,6 +63,13 @@ public class Ingredient implements Parcelable {
         return Integer.parseInt(quantity);
     }
 
+    public String getQuantityString() {
+        if(quantity == null){
+            return "0";
+        }
+        return quantity;
+    }
+
     public void setQuantity(double quantity) {
         if(quantity > 0) {
             this.quantity = Double.toString(quantity);

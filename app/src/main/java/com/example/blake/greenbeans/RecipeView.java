@@ -247,7 +247,7 @@ public class RecipeView extends AppCompatActivity {
         displayIngredients = new ArrayList<>();
        for(int i = 0; i < currentIngredients.size(); i++){
            //put into displayIngredients so that it shows up below the recipe
-           displayIngredients.add(currentIngredients.get(i).getQuantity() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
+           displayIngredients.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
        }
         Collections.sort(displayIngredients);
     }
