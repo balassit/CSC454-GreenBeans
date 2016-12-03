@@ -55,6 +55,16 @@ public class RecipeView extends AppCompatActivity {
         mealList = getIntent().getParcelableArrayListExtra("mealList");
         mealTitle.setText(name);
 
+        listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+
+        //set the current ingredients for recipe
+        createIngredients();
+        //set string for ingredients
+        displayIngredients();
+        adapterIngredients = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, displayIngredients);
+        listViewIngredients.setAdapter(adapterIngredients);
+        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
+
         //Pass recipe name on add to meal click
         btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
         btnAddToMeal.setOnClickListener(new View.OnClickListener(){
@@ -90,14 +100,6 @@ public class RecipeView extends AppCompatActivity {
                     }
                 }
 
-                listViewIngredients = (ListView) findViewById(R.id.ingredientList);
-                //set the current ingredients for recipe
-                createIngredients();
-                //set string for ingredients
-                displayIngredients();
-                adapterIngredients = new ArrayAdapter<String>(getActivtity(), R.layout.list_item, R.id.txtItem, displayIngredients);
-                listViewIngredients.setAdapter(adapterIngredients);
-                ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
                 intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
                 intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
