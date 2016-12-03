@@ -205,26 +205,30 @@ public class RecipeView extends AppCompatActivity {
     }
 
     public void addEquipment(Meal meal) {
-        if(name.equals("Apple")){
+        if (name.equals("Black Bean Hummus")) {
             meal.addToEquipment('a');
             meal.addToEquipment('b');
-        } else if(name.equals("banana")){
-            meal.addToEquipment('b');
-        } else if(name.equals("grape")){
+        } else if (name.equals("Mexican Pasta")) {
             meal.addToEquipment('c');
-            meal.addToEquipment('a');
+            meal.addToEquipment('d');
+            meal.addToEquipment('e');
+            meal.addToEquipment('f');
+        } else if (name.equals("French Orange Poached Pears")) {
+            meal.addToEquipment('g');
+            meal.addToEquipment('h');
+            meal.addToEquipment('f');
         }
     }
 
     public void addSkills(Meal meal) {
-        if(name.equals("Apple")){
+        if (name.equals("Black Bean Hummus")) {
             meal.addToSkills('a');
+        } else if (name.equals("Mexican Pasta")) {
             meal.addToSkills('b');
-        } else if(name.equals("banana")){
-            meal.addToSkills('b');
-        } else if(name.equals("grape")){
             meal.addToSkills('c');
-            meal.addToSkills('a');
+            meal.addToSkills('d');
+        } else if (name.equals("French Orange Poached Pears")) {
+            meal.addToSkills('e');
         }
     }
 
@@ -233,15 +237,36 @@ public class RecipeView extends AppCompatActivity {
      */
     private void createIngredients(){
         currentIngredients = new ArrayList<>();
-        if(name.equals("Apple")){
-            Ingredient flour = new Ingredient(3.0, "flour", "cups");
-            currentIngredients.add(flour);
-        } else if(name.equals("banana")){
-            Ingredient water = new Ingredient(5.0, "water", "drops");
-            currentIngredients.add(water);
-        } else if(name.equals("grape")){
-            Ingredient salt = new Ingredient(10.0, "salt", "KILOGRAMS");
-            currentIngredients.add(salt);
+        if (name.equals("Black Bean Hummus")) {
+            currentIngredients.add(new Ingredient(1.0, "clove", "garlic"));
+            currentIngredients.add(new Ingredient(1.0, "(15 ounce) can", "black beans"));
+            currentIngredients.add(new Ingredient(2.0, "tablespoon", "lemon juice"));
+            currentIngredients.add(new Ingredient(1.5, "tablespoon", "tahini"));
+            currentIngredients.add(new Ingredient(.75, "teaspoon", "ground cumin"));
+            currentIngredients.add(new Ingredient(.5, "teaspoon", "salt"));
+            currentIngredients.add(new Ingredient(.25, "teaspoon", "cayenne pepper"));
+            currentIngredients.add(new Ingredient(.25, "teaspoon", "paprika"));
+            currentIngredients.add(new Ingredient(10, "", "Greek olive"));
+        } else if (name.equals("Mexican Pasta")) {
+            currentIngredients.add(new Ingredient(.5, "pound", "seashell pasta"));
+            currentIngredients.add(new Ingredient(2, "tablespoon", "olive oil"));
+            currentIngredients.add(new Ingredient(2, "", "chopped onion"));
+            currentIngredients.add(new Ingredient(1, "", "chopped green bell pepper"));
+            currentIngredients.add(new Ingredient(.5, "cup", "sweet corn kernels"));
+            currentIngredients.add(new Ingredient(.5, "(15 ounce) can", "black beans"));
+            currentIngredients.add(new Ingredient(3, "(14.5 ounce) can", "peeled and diced tomatoes"));
+            currentIngredients.add(new Ingredient(.25, "cup", "salsa"));
+            currentIngredients.add(new Ingredient(.25, "cup", "sliced black olives"));
+            currentIngredients.add(new Ingredient(1.5, "tablespoon", "taco seasoning mix"));
+            currentIngredients.add(new Ingredient(0.25, "teaspoon", "salt and pepper"));
+        } else if (name.equals("French Orange Poached Pears")) {
+            currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
+            currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
+            currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
+            currentIngredients.add(new Ingredient(1, "tablespoon", "vanilla extract"));
+            currentIngredients.add(new Ingredient(2, "teaspoon", "ground cinnamon"));
+            currentIngredients.add(new Ingredient(3, "whole", "pears"));
+            currentIngredients.add(new Ingredient(.5, "cup", "chopped walnuts"));
         }
     }
 
@@ -254,7 +279,7 @@ public class RecipeView extends AppCompatActivity {
            //put into displayIngredients so that it shows up below the recipe
            displayIngredients.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
        }
-        Collections.sort(displayIngredients);
+        Collections.sort(displayIngredients, String.CASE_INSENSITIVE_ORDER);
     }
 
     private void setMealDescription() {

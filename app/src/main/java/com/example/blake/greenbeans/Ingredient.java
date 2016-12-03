@@ -31,7 +31,7 @@ public class Ingredient implements Parcelable {
     }
 
 
-    public Ingredient(double quantity, String name, String unit) {
+    public Ingredient(double quantity, String unit, String name) {
         this.quantity = "0";
         if(quantity > 0) {
             this.quantity = Double.toString(quantity);
@@ -82,8 +82,8 @@ public class Ingredient implements Parcelable {
 
         in.readStringArray(data);
         this.quantity = data[0];
-        this.name = data[1];
-        this.unit = data[2];
+        this.unit = data[1];
+        this.name = data[2];
     }
 
 

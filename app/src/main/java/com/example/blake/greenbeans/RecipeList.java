@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by blake on 11/23/16.
@@ -29,8 +30,9 @@ public class RecipeList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_list);
         ListView listView = (ListView) findViewById(R.id.listRecipes);
-        String[] items = {"Apple", "banana", "grape"};
+        String[] items = {"Black Bean Hummus", "Mexican Pasta", "French Orange Poached Pears"};
         recipes = new ArrayList<>(Arrays.asList(items));
+        Collections.sort(recipes, String.CASE_INSENSITIVE_ORDER);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipes);
         listView.setAdapter(adapter);
 

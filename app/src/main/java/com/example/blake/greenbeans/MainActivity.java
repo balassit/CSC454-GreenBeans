@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setRecipes(){
         listView = (ListView) findViewById(R.id.listRecipes);
-        String[] items = {"Apple", "banana", "grape"};
+        String[] items = {"Black Bean Hummus", "Mexican Pasta", "French Orange Poached Pears"};
         recipes = new ArrayList<>(Arrays.asList(items));
+        Collections.sort(recipes, String.CASE_INSENSITIVE_ORDER);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

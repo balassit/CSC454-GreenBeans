@@ -91,12 +91,12 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="170dp"
             android:id="@+id/ingredientList"
             android:isScrollContainer="true"
             android:layout_below="@+id/ratingBar"
+            android:layout_marginTop="19dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="19dp"></ListView>
+            android:layout_alignParentEnd="true"></ListView>
     </RelativeLayout>
 </ScrollView>

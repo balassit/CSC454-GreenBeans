@@ -151,48 +151,79 @@ public class MealCheckout extends AppCompatActivity {
         }
     }
 
-    private void getEquipmentList(String equipment){
+    private void getEquipmentList(String equipment) {
         if (equipment == null) {
             return;
         }
         char[] list = equipment.toCharArray();
 
         for(int i = 0; i < list.length; i++) {
-            if(list[i] == 'a') {
-                if(!equipmentList.contains("Stove")){
-                    equipmentList.add("Stove");
-                }
-            } else if(list[i] == 'b') {
-                if(!equipmentList.contains("Oven")){
-                    equipmentList.add("Oven");
-                }
-            } else if(list[i] == 'c') {
-                if(!equipmentList.contains("Pot")){
-                    equipmentList.add("Pot");
-                }
+            String toAdd = null;
+            switch (list[i]) {
+                case 'a':
+                    toAdd = "food processor";
+                    break;
+                case 'b':
+                    toAdd = "spatula";
+                    break;
+                case 'c':
+                    toAdd = "stove";
+                    break;
+                case 'd':
+                    toAdd = "large skillet";
+                    break;
+                case 'e':
+                    toAdd = "large pot";
+                    break;
+                case 'f':
+                    toAdd = "wooden spoon";
+                    break;
+                case 'g':
+                    toAdd = "large saucepan";
+                    break;
+                case 'h':
+                    toAdd = "large saucepan cover";
+                    break;
+                default:
+                    toAdd = null;
+                    break;
+            }
+            if (toAdd != null && !equipmentList.contains(toAdd)){
+                equipmentList.add(toAdd);
             }
         }
     }
 
-    private void getSkillsList(String skills){
+    private void getSkillsList(String skills) {
         if (skills == null) {
             return;
         }
         char[] list = skills.toCharArray();
 
         for(int i = 0; i < list.length; i++) {
-            if(list[i] == 'a') {
-                if(!skillsList.contains("Stir")){
-                    skillsList.add("Stir");
-                }
-            } else if(list[i] == 'b') {
-                if(!skillsList.contains("mix")){
-                    skillsList.add("mix");
-                }
-            } else if(list[i] == 'c') {
-                if(!skillsList.contains("cut")){
-                    skillsList.add("cut");
-                }
+            String toAdd = null;
+            switch (list[i]) {
+                case 'a':
+                    toAdd = "Straining and keeping liquid";
+                    break;
+                case 'b':
+                    toAdd = "Cooking pasta";
+                    break;
+                case 'c':
+                    toAdd = "Straining pasta";
+                    break;
+                case 'd':
+                    toAdd = "Sautéing vegetables";
+                    break;
+                case 'e':
+                    toAdd = "Poaching fruit";
+                    break;
+                default:
+                    toAdd = null;
+                    break;
+            }
+            if (toAdd != null && !skillsList.contains(toAdd)) {
+                skillsList.add(toAdd);
             }
         }
     }
