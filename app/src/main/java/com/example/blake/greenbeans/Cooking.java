@@ -31,6 +31,8 @@ import java.util.List;
 public class Cooking extends AppCompatActivity{
 
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
+    private static final int REQUEST_CODE_CHECK_OUT = 200;
+
     private ListView listViewSteps;
     private ArrayList<Meal> mealList;
     private ArrayAdapter<String> adapterSteps;
@@ -67,6 +69,31 @@ public class Cooking extends AppCompatActivity{
 
         adapterSteps = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, stepsList);
         listViewSteps.setAdapter(adapterSteps);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.cancel, menu);
+
+        return (super.onCreateOptionsMenu(menu));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.cancel:
+                // User chose the "Home" item, go to home
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(Activity.RESULT_OK, intent);
+                startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
+                //startActivity(new Intent(RecipeView.this, RecipeList.class));
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     //update Recipe List with new recipe

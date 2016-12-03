@@ -11,4 +11,5 @@
     <string name="checkout">checkout</string>
     <string name="equipment">Equipment</string>
     <string name="skills">Skills</string>
+    <string name="cancel">Cancel Meal</string>
 </resources>
