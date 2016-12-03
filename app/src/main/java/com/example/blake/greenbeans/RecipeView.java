@@ -35,6 +35,7 @@ public class RecipeView extends AppCompatActivity {
     private ArrayAdapter<String> adapterIngredients;
     private ListView listViewIngredients;
     private TextView mealTitle;
+    private TextView mealDescription;
     private Button btnAddToMeal;
     String name;
 
@@ -51,9 +52,13 @@ public class RecipeView extends AppCompatActivity {
         }
                 //Set Meal title to name of recipe
         mealTitle = (TextView) findViewById(R.id.mealTitle);
+        mealDescription = (TextView) findViewById(R.id.mealDescription);
         name = getIntent().getStringExtra("name");
         mealList = getIntent().getParcelableArrayListExtra("mealList");
         mealTitle.setText(name);
+
+        //set the text of the recipe based on which one it is
+        setMealDescription();
 
         listViewIngredients = (ListView) findViewById(R.id.ingredientList);
 
@@ -252,4 +257,19 @@ public class RecipeView extends AppCompatActivity {
         Collections.sort(displayIngredients);
     }
 
+    private void setMealDescription() {
+        String appleDescrition = "apple is red";
+        String bananaDescription = "banana is brown. do not use.";
+        String grapeDescription = "actually a grape bundle, not a single grape. /n" +
+                "actually a grape bundle, not a single grape. /n";
+        if (name.equals("Apple")) {
+            mealDescription.setText(appleDescrition);
+        }
+        else if(name.equals("banana")) {
+            mealDescription.setText(bananaDescription);
+        }
+        else if(name.equals("grape")) {
+            mealDescription.setText(grapeDescription);
+        }
+    }
 }
