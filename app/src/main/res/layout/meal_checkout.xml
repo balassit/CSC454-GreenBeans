@@ -68,4 +68,14 @@
         android:id="@+id/skillsList"
         android:layout_below="@+id/skill"
         android:isScrollContainer="true"></ListView>
+
+    <Button
+        android:text="Start Meal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCheckout"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_below="@+id/skillsList"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp" />
 </LinearLayout>
