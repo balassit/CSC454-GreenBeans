@@ -26,7 +26,7 @@ import java.util.Collections;
 
 public class MealCheckout extends AppCompatActivity {
 
-    String ActivityResult;
+    
     private static final int REQUEST_CODE_RECIPE_LIST = 100;
     private ListView listViewRecipe;
     private ListView listViewEquipment;
