@@ -43,6 +43,7 @@ public class MealCheckout extends AppCompatActivity {
     private ArrayList<String> skillsList = new ArrayList<String>();
     private Button btnCheckout;
     private ArrayList<Ingredient> ingredientList;
+    private ArrayList<String> recipeQuantity = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class MealCheckout extends AppCompatActivity {
         updateRecipeList();
 
         //Create list of Recipes
-        adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
+        adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeQuantity);
         adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
         adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
         listViewRecipe.setAdapter(adapterRecipe);
@@ -87,7 +88,7 @@ public class MealCheckout extends AppCompatActivity {
 
     //update Recipe List with new recipe
     private void updateRecipeList(){
-            if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+        if (getIntent().getParcelableArrayListExtra("mealList") != null && !getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
             mealList = getIntent().getParcelableArrayListExtra("mealList");
             for(int i = 0; i < mealList.size(); i++){
                 recipeList.add(mealList.get(i).getRecipe());
@@ -97,6 +98,16 @@ public class MealCheckout extends AppCompatActivity {
             Collections.sort(recipeList, String.CASE_INSENSITIVE_ORDER);
             Collections.sort(equipmentList, String.CASE_INSENSITIVE_ORDER);
             Collections.sort(skillsList, String.CASE_INSENSITIVE_ORDER);
+
+            // add the quantity to the recipe list
+            for(int i = 0; i < recipeList.size(); i++) {
+                for(int j = 0; j < mealList.size(); j++){
+                    if(mealList.get(j).getRecipe().equals(recipeList.get(i))){
+                        recipeQuantity.add(mealList.get(j).getQuantity() + " " + recipeList.get(i));
+
+                    }
+                }
+            }
         }
     }
 
