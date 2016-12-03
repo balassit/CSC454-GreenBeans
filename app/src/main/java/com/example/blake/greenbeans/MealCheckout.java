@@ -60,6 +60,7 @@ public class MealCheckout extends AppCompatActivity {
         //Create list of Recipes
         adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeList);
         adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
+        adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
         listViewRecipe.setAdapter(adapterRecipe);
         listViewEquipment.setAdapter(adapterEquipment);
         listViewSkills.setAdapter(adapterSkills);

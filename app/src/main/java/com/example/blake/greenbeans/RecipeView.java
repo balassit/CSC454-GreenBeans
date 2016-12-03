@@ -260,8 +260,7 @@ public class RecipeView extends AppCompatActivity {
     private void setMealDescription() {
         String appleDescrition = "apple is red";
         String bananaDescription = "banana is brown. do not use.";
-        String grapeDescription = "actually a grape bundle, not a single grape. /n" +
-                "actually a grape bundle, not a single grape. /n";
+        String grapeDescription = "actually a grape bundle, not a single grape. What else can I put in here to make it longer than one line";
         if (name.equals("Apple")) {
             mealDescription.setText(appleDescrition);
         }
