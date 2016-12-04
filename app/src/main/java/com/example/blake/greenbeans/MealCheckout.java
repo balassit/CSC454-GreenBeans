@@ -318,7 +318,7 @@ public class MealCheckout extends AppCompatActivity {
         ingredientDisplay = new ArrayList<>();
         for(int i = 0; i < currentIngredients.size(); i++){
             //put into displayIngredients so that it shows up below the recipe
-            ingredientDisplay.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
+            ingredientDisplay.add(currentIngredients.get(i).getDisplayString());
         }
         Collections.sort(ingredientDisplay, String.CASE_INSENSITIVE_ORDER);
     }

@@ -8,10 +8,9 @@ import android.os.Parcelable;
  */
 
 public class Ingredient implements Parcelable {
-    private String quantity;
+    private double quantity;
     private String unit;
     private String name;
-    private String original;
 
     private int mData;
 
@@ -25,34 +24,29 @@ public class Ingredient implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {this.quantity,
-                this.quantity,
+        dest.writeStringArray(new String[] {
+                Double.toString(quantity),
                 this.name,
-                this.unit,
-                this.original});
+                this.unit
+        });
     }
-
 
     public Ingredient(double quantity, String unit, String name) {
-        this.quantity = "0";
-        if(quantity > 0) {
-            this.quantity = Double.toString(quantity);
-        }
-        this.name = unit;
-        this.unit = name;
-        this.original = Double.toString(quantity);;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.name = name;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getUnitString() {
+        return unit.equals("") ? "" : unit + (quantity > 1 ? "s" : "") + " ";
     }
 
     public void setUnit(String unit) {
         this.unit = unit;
     }
 
-    public String getName() {
-        return name;
+    public String getNameString() {
+        return name.equals("") ? "" : name + " ";
     }
 
     public void setName(String name) {
@@ -60,33 +54,45 @@ public class Ingredient implements Parcelable {
     }
 
     public double getQuantity() {
-        if(quantity == null){
-            return 0;
-        }
-        return Double.parseDouble(quantity);
-    }
-
-    public String getQuantityString() {
-        if(quantity == null){
-            return "0";
-        }
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
-        if(quantity > 0) {
-            this.quantity = Double.toString(quantity);
+    public String getQuantityString() {
+        if (quantity < 0) {
+            return "";
+        }
+        else {
+            String quantityString = "";
+            if ((int) quantity > 0) {
+                quantityString += Integer.toString((int) quantity) + " ";
+            }
+
+            double fraction = quantity % 1;
+            if (Math.abs(fraction - .25) < .01) {
+                quantityString += "1/4 ";
+            }
+            else if (Math.abs(fraction - .5) < .01) {
+                quantityString += "1/2 ";
+            }
+            else if (Math.abs(fraction - .75) < .01) {
+                quantityString += " 3/4 ";
+            }
+
+            return quantityString + "\t\t";
         }
     }
 
-    public String getOriginal(){
-        return this.original;
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
 
     public void addOneQuanity(){
-        double set = Double.parseDouble(this.quantity) + Double.parseDouble(this.original);
-        this.quantity = Double.toString(set);
+        this.quantity *= 2;
+    }
+
+    public String getDisplayString() {
+        return this.getQuantityString() + this.getUnitString() + this.getNameString();
     }
 
 
@@ -95,13 +101,10 @@ public class Ingredient implements Parcelable {
         String[] data = new String[4];
 
         in.readStringArray(data);
-        this.quantity = data[0];
+        this.quantity = Double.valueOf(data[0]);
         this.unit = data[1];
         this.name = data[2];
-        this.original = data[3];
     }
-
-
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Ingredient createFromParcel(Parcel in) {
