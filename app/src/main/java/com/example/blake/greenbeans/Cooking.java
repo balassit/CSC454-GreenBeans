@@ -154,7 +154,7 @@ public class Cooking extends AppCompatActivity {
                 System.out.println("______________________________________");
 
                 //if first step
-                if(i == 0) {
+                if (i == 0) {
                     //set previous step to nothing
                     previousStep.setText("None");
                     //set current step to first step
@@ -162,8 +162,8 @@ public class Cooking extends AppCompatActivity {
                     //set next step to next step
                     nextStep.setText(allSteps.get(i + 1).getDescription());
 
-                //if last step
-                } else if(i == (allSteps.size() - 1)) {
+                    //if last step
+                } else if (i == (allSteps.size() - 1)) {
                     //set previous step to nothing
                     previousStep.setText(allSteps.get(i - 1).getDescription());
                     //set current step to first step
@@ -180,20 +180,18 @@ public class Cooking extends AppCompatActivity {
                 counter = allSteps.get(i).getTime();
                 timer1 = new CountDownTimer(counter * 1000, 1000) {
                     public void onTick(long millisUntilFinished) {
-                        timer.setText(String.valueOf(counter));
+                        int seconds = counter % 60;
+                        int minutes = counter / 60;
+                        String stringTime = String.format("%02d:%02d", minutes, seconds);
+                        timer.setText(stringTime);
                         counter--;
 
                     }
 
                     public void onFinish() {
                         i++;
-                        timer.setText("Next Step");
-                        btnNextStep.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View view) {
-                                startCooking();
-
-                            }
-                        });
+                        timer.setText("Finished");
+                        btnNextStep.setText("Next Step");
                     }
                 };
                 timer1.start();
@@ -201,16 +199,35 @@ public class Cooking extends AppCompatActivity {
                 btnNextStep.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         timer1.cancel();
-                        btnNextStep.setText("Next Step");
                         i++;
-                        //timer.setText("Cancel Timer");
-                        startCooking();
+
+                        if(i != allSteps.size()) {
+                            btnNextStep.setText("Next Step");
+                            startCooking();
+                        } else {
+                            btnNextStep.setText("Finish");
+                            finishCooking();
+
+                        }
 
                     }
                 });
             }
         });
     }
+
+    private void finishCooking(){
+        btnNextStep = (Button) findViewById(R.id.btnNextStep);
+
+        btnNextStep.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(Activity.RESULT_OK, intent);
+                startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
+            }
+        });
+    }
+
 
 
     //update Recipe List with new recipe
