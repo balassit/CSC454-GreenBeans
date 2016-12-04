@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Ingredient implements Parcelable {
+    private double originalQuantity;
     private double quantity;
     private String unit;
     private String name;
@@ -32,6 +33,7 @@ public class Ingredient implements Parcelable {
     }
 
     public Ingredient(double quantity, String unit, String name) {
+        this.originalQuantity = quantity;
         this.quantity = quantity;
         this.unit = unit;
         this.name = name;
@@ -78,7 +80,7 @@ public class Ingredient implements Parcelable {
                 quantityString += " 3/4 ";
             }
 
-            return quantityString + "\t\t";
+            return quantityString + " ";
         }
     }
 
@@ -88,11 +90,16 @@ public class Ingredient implements Parcelable {
 
 
     public void addOneQuanity(){
-        this.quantity *= 2;
+        this.quantity += originalQuantity;
     }
 
     public String getDisplayString() {
-        return this.getQuantityString() + this.getUnitString() + this.getNameString();
+        if (this.unit.equals("")) {
+            return this.getQuantityString() + this.name + (quantity > 1 ? "s" : "");
+        }
+        else {
+            return this.getQuantityString() + this.getUnitString() + this.getNameString();
+        }
     }
 
 
