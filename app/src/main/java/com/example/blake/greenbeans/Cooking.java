@@ -95,8 +95,7 @@ public class Cooking extends AppCompatActivity {
         btnNextStep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 counter = 10;
-                CountDownTimer timer1;
-                timer1 = new CountDownTimer(10000, 1000) {
+                CountDownTimer timer1 = new CountDownTimer(10000, 1000) {
                     public void onTick(long millisUntilFinished) {
                         timer.setText(String.valueOf(counter));
                         counter--;

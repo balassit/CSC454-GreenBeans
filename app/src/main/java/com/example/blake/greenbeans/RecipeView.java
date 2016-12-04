@@ -2,6 +2,7 @@ package com.example.blake.greenbeans;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +38,7 @@ public class RecipeView extends AppCompatActivity {
     private ArrayList<Meal> mealList;
     private ArrayList<Ingredient> ingredientList;
     private ArrayList<Ingredient> currentIngredients;
-    private ArrayList<String> displayIngredients =  new ArrayList<String>();
+    private ArrayList<String> displayIngredients = new ArrayList<String>();
     private ArrayAdapter<String> adapterIngredients;
     private ListView listViewIngredients;
     private TextView mealTitle;
@@ -39,6 +46,11 @@ public class RecipeView extends AppCompatActivity {
     private TextView mealTime;
     private Button btnAddToMeal;
     String name;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +63,7 @@ public class RecipeView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-                //Set Meal title to name of recipe
+        //Set Meal title to name of recipe
         mealTitle = (TextView) findViewById(R.id.mealTitle);
         mealDescription = (TextView) findViewById(R.id.mealDescription);
         mealTime = (TextView) findViewById(R.id.mealTime);
@@ -79,6 +91,9 @@ public class RecipeView extends AppCompatActivity {
         //Pass recipe name on add to meal click
         addToMeal();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,10 +175,10 @@ public class RecipeView extends AppCompatActivity {
 
     private void addToMeal() {
         btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
-        btnAddToMeal.setOnClickListener(new View.OnClickListener(){
+        btnAddToMeal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
-                if(mealList == null){
+                if (mealList == null) {
                     mealList = new ArrayList<Meal>();
                     ingredientList = new ArrayList<Ingredient>();
                     Meal meal = new Meal(name);
@@ -173,8 +188,7 @@ public class RecipeView extends AppCompatActivity {
                     //addIngredients();
                     //add ingredients to the ingredient that is passed to a new instance
                     mealList.add(meal);
-                }
-                else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+                } else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
                     boolean added = false;
                     for (int i = 0; i < mealList.size(); i++) {
                         if (mealList.get(i).getRecipe().equals(name)) {
@@ -184,7 +198,7 @@ public class RecipeView extends AppCompatActivity {
                             break;
                         }
                     }
-                    if(!added){
+                    if (!added) {
                         Meal meal = new Meal(name);
                         addEquipment(meal);
                         addSkills(meal);
@@ -252,9 +266,13 @@ public class RecipeView extends AppCompatActivity {
     /**
      * Set the current ingredients for the recipes
      */
-    private void createIngredients(){
+    private void createIngredients() {
         currentIngredients = new ArrayList<>();
         if (name.equals("Black Bean Hummus")) {
+            ImageView iv = (ImageView)findViewById(R.id.imageView);
+            iv.setImageResource(R.drawable.black_bean_hummus);
+            iv.getLayoutParams().height = 1000;
+            iv.getLayoutParams().width = 20;
             currentIngredients.add(new Ingredient(1.0, "clove", "garlic"));
             currentIngredients.add(new Ingredient(1.0, "(15 ounce) can", "black beans"));
             currentIngredients.add(new Ingredient(2.0, "tablespoon", "lemon juice"));
@@ -265,6 +283,10 @@ public class RecipeView extends AppCompatActivity {
             currentIngredients.add(new Ingredient(.25, "teaspoon", "paprika"));
             currentIngredients.add(new Ingredient(10, "", "Greek olive"));
         } else if (name.equals("Mexican Pasta")) {
+            ImageView iv = (ImageView)findViewById(R.id.imageView);
+            iv.setImageResource(R.drawable.mexican_pasta);
+            iv.getLayoutParams().height = 1000;
+            iv.getLayoutParams().width = 1000;
             currentIngredients.add(new Ingredient(.5, "pound", "seashell pasta"));
             currentIngredients.add(new Ingredient(2, "tablespoon", "olive oil"));
             currentIngredients.add(new Ingredient(2, "", "chopped onion"));
@@ -277,6 +299,10 @@ public class RecipeView extends AppCompatActivity {
             currentIngredients.add(new Ingredient(1.5, "tablespoon", "taco seasoning mix"));
             currentIngredients.add(new Ingredient(0.25, "teaspoon", "salt and pepper"));
         } else if (name.equals("French Orange Poached Pears")) {
+            ImageView iv = (ImageView)findViewById(R.id.imageView);
+            iv.setImageResource(R.drawable.pears);
+            iv.getLayoutParams().height = 1000;
+            iv.getLayoutParams().width = 1000;
             currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
             currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
             currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
@@ -290,12 +316,12 @@ public class RecipeView extends AppCompatActivity {
     /**
      * Create a string to go in the list view for each ingredient
      */
-    private void displayIngredients(){
+    private void displayIngredients() {
         displayIngredients = new ArrayList<>();
-       for(int i = 0; i < currentIngredients.size(); i++){
-           //put into displayIngredients so that it shows up below the recipe
-           displayIngredients.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
-       }
+        for (int i = 0; i < currentIngredients.size(); i++) {
+            //put into displayIngredients so that it shows up below the recipe
+            displayIngredients.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
+        }
         Collections.sort(displayIngredients, String.CASE_INSENSITIVE_ORDER);
     }
 
@@ -303,9 +329,9 @@ public class RecipeView extends AppCompatActivity {
      * Set the description for each recipe
      */
     private void setMealDescription() {
-        String hummusDescrition = "apple is red";
-        String pastaDescription = "banana is brown. do not use.";
-        String pearDescription = "actually a grape bundle, not a single grape. What else can I put in here to make it longer than one line";
+        String hummusDescrition = "This hummus comes with raves attached to it. Everything goes into the food processor and is swooshed into a fabulous consistency. Try it with some toasted pita bread.";
+        String pastaDescription = "Pasta tossed with a quickly cooked sauce of tomatoes, onion, bell pepper, corn, black beans, salsa and taco seasoning.";
+        String pearDescription = "Pears are simply poached in sweetened and spiced orange juice for a light, refreshing French dessert.";
         if (name.equals("Black Bean Hummus")) {
             mealDescription.setText(hummusDescrition);
         }
@@ -318,9 +344,9 @@ public class RecipeView extends AppCompatActivity {
     }
 
     private void setTime() {
-        String hummusTime = "Total Cook Time: 11 minutes";
-        String pastaTime = "Total Cook Time: 34 minutes";
-        String pearTime = "Total Cook Time: 25 mintutes";
+        String hummusTime = "Total Cook Time: 5 minutes";
+        String pastaTime = "Total Cook Time: 20 minutes";
+        String pearTime = "Total Cook Time: 1 hour 45 mintutes";
         if (name.equals("Black Bean Hummus")) {
             mealTime.setText(hummusTime);
         }
@@ -330,5 +356,41 @@ public class RecipeView extends AppCompatActivity {
         else if(name.equals("French Orange Poached Pears")) {
             mealTime.setText(pearTime);
         }
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("RecipeView Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 }
