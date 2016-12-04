@@ -79,13 +79,17 @@ public class RecipeView extends AppCompatActivity {
         setTime();
 
         listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+        listViewIngredients.setScrollContainer(false);
 
         //set the current ingredients for recipe
         createIngredients();
         //set string for ingredients
         displayIngredients();
         adapterIngredients = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, displayIngredients);
+
         listViewIngredients.setAdapter(adapterIngredients);
+        UIUtils.setListViewHeightBasedOnItems(listViewIngredients);
+
         ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
         //Pass recipe name on add to meal click
@@ -271,8 +275,8 @@ public class RecipeView extends AppCompatActivity {
         if (name.equals("Black Bean Hummus")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.black_bean_hummus);
-            iv.getLayoutParams().height = 1000;
-            iv.getLayoutParams().width = 20;
+            iv.getLayoutParams().height = 700;
+            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(1.0, "clove", "garlic"));
             currentIngredients.add(new Ingredient(1.0, "(15 ounce) can", "black beans"));
             currentIngredients.add(new Ingredient(2.0, "tablespoon", "lemon juice"));
@@ -285,8 +289,8 @@ public class RecipeView extends AppCompatActivity {
         } else if (name.equals("Mexican Pasta")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.mexican_pasta);
-            iv.getLayoutParams().height = 1000;
-            iv.getLayoutParams().width = 1000;
+            iv.getLayoutParams().height = 700;
+            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(.5, "pound", "seashell pasta"));
             currentIngredients.add(new Ingredient(2, "tablespoon", "olive oil"));
             currentIngredients.add(new Ingredient(2, "", "chopped onion"));
@@ -301,8 +305,8 @@ public class RecipeView extends AppCompatActivity {
         } else if (name.equals("French Orange Poached Pears")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.pears);
-            iv.getLayoutParams().height = 1000;
-            iv.getLayoutParams().width = 1000;
+            iv.getLayoutParams().height = 700;
+            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
             currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
             currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
