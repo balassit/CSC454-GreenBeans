@@ -20,7 +20,10 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="50dp">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +38,7 @@
                 app:srcCompat="@mipmap/ic_launcher"
                 android:contentDescription="@string/meal_image"
                 android:id="@+id/imageView"
-                android:layout_below="@+id/mealTitle"
+                android:layout_marginTop="56dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
@@ -45,13 +48,13 @@
                 android:text="@string/mealDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="4dp"
                 android:id="@+id/mealDescription"
                 android:isScrollContainer="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textAlignment="viewStart"
                 android:gravity="start"
-                android:layout_below="@+id/imageView"
+                android:layout_below="@+id/mealTitle"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
@@ -62,28 +65,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/mealTime"
                 android:layout_below="@+id/mealDescription"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <Button
-                android:text="@string/add_to_meal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnAddToMeal"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_below="@+id/mealTime"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp" />
 
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ratingBar"
-                android:layout_below="@+id/btnAddToMeal"
+                android:layout_below="@+id/mealTime"
                 android:layout_centerHorizontal="true"
-                android:clickable="false" />
+                android:clickable="false"
+                android:layout_marginTop="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,11 +96,11 @@
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/ingredientList"
                 android:isScrollContainer="false"
                 android:layout_below="@+id/ingredientText"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="3dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
 
@@ -118,15 +112,24 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/mealTitle"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:layout_marginTop="56dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/ratingBar"
-                android:layout_alignStart="@+id/ratingBar"
-                android:layout_marginLeft="14dp"
-                android:layout_marginStart="14dp"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
 
     </ScrollView>
+
+    <Button
+        android:text="@string/add_to_meal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddToMeal"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"/>
 
 </RelativeLayout>

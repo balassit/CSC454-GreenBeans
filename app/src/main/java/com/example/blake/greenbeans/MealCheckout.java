@@ -70,7 +70,13 @@ public class MealCheckout extends AppCompatActivity {
         listViewEquipment = (ListView) findViewById(R.id.equipmentList);
         listViewSkills = (ListView) findViewById(R.id.skillsList);
         listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+/*
 
+        listViewRecipe.setScrollContainer(false);
+        listViewEquipment.setScrollContainer(false);
+        listViewSkills.setScrollContainer(false);
+        listViewIngredients.setScrollContainer(false);
+*/
         updateRecipeList();
 
         //Create list of Recipes
@@ -83,6 +89,11 @@ public class MealCheckout extends AppCompatActivity {
         listViewRecipe.setAdapter(adapterRecipe);
         listViewEquipment.setAdapter(adapterEquipment);
         listViewSkills.setAdapter(adapterSkills);
+
+        UIUtils.setListViewHeightBasedOnItems(listViewIngredients);
+        UIUtils.setListViewHeightBasedOnItems(listViewRecipe);
+        UIUtils.setListViewHeightBasedOnItems(listViewEquipment);
+        UIUtils.setListViewHeightBasedOnItems(listViewSkills);
 
         //Pass recipe name on add to meal click
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
