@@ -26,16 +26,51 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below= "@+id/my_toolbar"
+            android:id="@+id/previous_step"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/stepsList"
-            android:isScrollContainer="true"
-            android:layout_below="@+id/my_toolbar"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="19dp"></ListView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below= "@+id/previous_step"
+            android:id="@+id/current_step"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below= "@+id/current_step"
+            android:id="@+id/timer"
+            android:textSize= "25dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+            android:textSize= "25dp"
+
+        <Button
+            android:text="Next Step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnNextStep"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_below="@+id/timer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below= "@+id/timer"
+            android:id="@+id/next_step"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
 
         <Button
             android:text="Start Meal"
@@ -43,7 +78,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnStartMeal"
             style="@style/Widget.AppCompat.Button"
-            android:layout_below="@+id/stepsList"
+            android:layout_below="@+id/next_step"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp" />
     </RelativeLayout>
