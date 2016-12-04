@@ -1,11 +1,9 @@
 package com.example.blake.greenbeans;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.os.CountDownTimer;
 
 import com.google.android.gms.appindexing.Action;
@@ -24,14 +21,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,7 +40,8 @@ public class Cooking extends AppCompatActivity {
     private ArrayAdapter<String> adapterSteps;
     private ArrayList<String> stepsList = new ArrayList<String>();
     private ArrayList<List> directionList = new ArrayList<>();
-    private ArrayList<MealItem> mealItems = new ArrayList<>();
+    //private ArrayList<MealItem> mealItems = new ArrayList<>();
+    private ArrayList<Step> allSteps = new ArrayList<Step>();
 
     private Button btnNextStep;
     /**
@@ -71,8 +64,10 @@ public class Cooking extends AppCompatActivity {
         }
 
         //get the meal list
-        updateMealList();
+        //updateMealList();
+        addAllSteps();
 
+        /*
         //directions
         for (int i = 0; i < mealList.size(); i++) {
             mealItems.add(setRecipeDirections(mealList.get(i).getRecipe(), mealList.get(i).getQuantity()));
@@ -83,6 +78,7 @@ public class Cooking extends AppCompatActivity {
         for (int i = 0; i > mealItems.size(); i++) {
             stepsList.add(mealItems.get(0).getRecipeName() + ": " + mealItems.get(0).getDirections());
         }
+        */
 
         /*
         adapterSteps = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, stepsList);
@@ -147,6 +143,58 @@ public class Cooking extends AppCompatActivity {
                 }
             }
 
+            /**
+            * add all the steps to the array in order they will go for making the recipe
+            */
+            private void addAllSteps(){
+                String description;
+                int time;
+                String meal;
+                Step temp;
+
+                //NOT SURE IF THIS WILL REFERENCE TEMP AND CHANGE IT EACH TIME
+                //BLAKE CARTER LOOK AT THIS
+                //ALSO THIS IS HARD CODING HELL hahahahaha
+
+                meal = "Black Bean Hummus";
+                description = "first Step Description";
+                time = 10;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+                meal = "Mexican Pasta";
+                description = "Second Step Description";
+                time = 20;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+                meal = "French Orange Poached Pears";
+                description = "Thrid Step Description";
+                time = 30;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+
+                meal = "Black Bean Hummus";
+                description = "Fourth Step Description";
+                time = 40;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+                meal = "Mexican Pasta";
+                description = "Fifth Step Description";
+                time = 50;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+                meal = "French Orange Poached Pears";
+                description = "Sixth Step Description";
+                time = 60;
+                temp = new Step(meal, description, time);
+                allSteps.add(temp);
+
+            }
+
 
             /**
              * Set the directions for an individual recipe(meal item).
@@ -154,6 +202,8 @@ public class Cooking extends AppCompatActivity {
              * @param recipeName
              * @param quantity
              */
+            /*
+
             private MealItem setRecipeDirections(String recipeName, int quantity) {
                 MealItem meal = new MealItem();
                 if (recipeName.equals("Apple")) {
@@ -183,6 +233,7 @@ public class Cooking extends AppCompatActivity {
 
                 return meal;
             }
+            */
 
             /**
              * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -219,7 +270,7 @@ public class Cooking extends AppCompatActivity {
                 AppIndex.AppIndexApi.end(client, getIndexApiAction());
                 client.disconnect();
             }
-
+    /*
     private class MealItem {
         ArrayList<String> directions;
         String recipeName;
@@ -257,6 +308,7 @@ public class Cooking extends AppCompatActivity {
         }
 
     }
+    */
 
 
 }
