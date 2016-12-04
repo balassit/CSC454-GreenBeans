@@ -240,19 +240,19 @@ public class MealCheckout extends AppCompatActivity {
             String toAdd = null;
             switch (list[i]) {
                 case 'a':
-                    toAdd = "Straining and keeping liquid";
+                    toAdd = "straining and keeping liquid";
                     break;
                 case 'b':
-                    toAdd = "Cooking pasta";
+                    toAdd = "cooking pasta";
                     break;
                 case 'c':
-                    toAdd = "Straining pasta";
+                    toAdd = "straining pasta";
                     break;
                 case 'd':
-                    toAdd = "Sautéing vegetables";
+                    toAdd = "sautéing vegetables";
                     break;
                 case 'e':
-                    toAdd = "Poaching fruit";
+                    toAdd = "poaching fruit";
                     break;
                 default:
                     toAdd = null;
