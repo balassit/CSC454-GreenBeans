@@ -20,7 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:isScrollContainer="true"
-        android:id="@+id/meal">
+        android:id="@+id/meal"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false">
 
     </ListView>
 
@@ -40,7 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:isScrollContainer="true"
-        android:id="@+id/ingredientList">
+        android:id="@+id/ingredientList"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false">
 
     </ListView>
 
@@ -60,7 +64,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:isScrollContainer="true"
-        android:id="@+id/equipmentList">
+        android:id="@+id/equipmentList"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false">
 
     </ListView>
 
@@ -80,7 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:isScrollContainer="true"
-        android:id="@+id/skillsList">
+        android:id="@+id/skillsList"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false">
 
     </ListView>
     <Button

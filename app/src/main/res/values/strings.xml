@@ -15,4 +15,6 @@
     <string name="ingredients">Ingredients</string>
     <string name="start_meal">Start Meal</string>
     <string name="toolbar">Toolbar</string>
+    <string name="add_to_meal">Add to Meal</string>
+    <string name="meal_image">meal image</string>
 </resources>

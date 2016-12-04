@@ -22,5 +22,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/listRecipes"
-        android:layout_below="@+id/search"></ListView>
+        android:layout_below="@+id/search"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false">
+    </ListView>
 </LinearLayout>

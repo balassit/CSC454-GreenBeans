@@ -6,6 +6,8 @@
     <TextView
         android:id="@+id/txtItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#4B4B4B"
+        android:textSize="18sp"/>
 
 </LinearLayout>
