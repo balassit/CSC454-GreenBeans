@@ -71,46 +71,8 @@ public class RecipeView extends AppCompatActivity {
         ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
         //Pass recipe name on add to meal click
-        btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
-        btnAddToMeal.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
-                if(mealList == null){
-                    mealList = new ArrayList<Meal>();
-                    Meal meal = new Meal(name);
-                    meal.addToQuantity(1);
-                    addEquipment(meal);
-                    addSkills(meal);
-                    //add ingredients to the ingredient that is passed to a new instance
-                    // addIngredients();
-                    mealList.add(meal);
-                }
-                else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
-                    boolean added = false;
-                    for (int i = 0; i < mealList.size(); i++) {
-                        if (mealList.get(i).getRecipe().equals(name)) {
-                            mealList.get(i).addToQuantity(1);
-                            added = true;
-                            break;
-                        }
-                    }
-                    if(!added){
-                        Meal meal = new Meal(name);
-                        addEquipment(meal);
-                        addSkills(meal);
-                        meal.addToQuantity(1);
-                        mealList.add(meal);
-                        //add ingredients to the ingredient that is passed to a new instance
-                        // addIngredients();
-                    }
-                }
+        addToMeal();
 
-
-                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
-                intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
-                startActivityForResult(intent, REQUEST_CODE_ADD_RECIPE);
-            }
-        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -191,17 +153,65 @@ public class RecipeView extends AppCompatActivity {
     //on add to meal-->update the meal with that number and go back to recipe list? or stay there
 
     private void addToMeal() {
-        btnAddToMeal.setOnClickListener(new View.OnClickListener() {
-            //how can i carry the total number of this meal into the page?
-            //need to add the current recipe.
-            //the recipe view has to use the recipe information
-            @Override
-            public void onClick(View v) {
-                //Meal meal = new Meal(1, )
-                Intent intent = new Intent(getApplicationContext(), RecipeList.class);
-                startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
+        btnAddToMeal = (Button) findViewById(R.id.btnAddToMeal);
+        btnAddToMeal.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MealCheckout.class);
+                if(mealList == null){
+                    mealList = new ArrayList<Meal>();
+                    ingredientList = new ArrayList<Ingredient>();
+                    Meal meal = new Meal(name);
+                    meal.addToQuantity(1);
+                    addEquipment(meal);
+                    addSkills(meal);
+                    addIngredients();
+                    //add ingredients to the ingredient that is passed to a new instance
+                    mealList.add(meal);
+                }
+                else if (!getIntent().getParcelableArrayListExtra("mealList").isEmpty()) {
+                    boolean added = false;
+                    for (int i = 0; i < mealList.size(); i++) {
+                        if (mealList.get(i).getRecipe().equals(name)) {
+                            mealList.get(i).addToQuantity(1);
+                            addIngredientsQuantity();
+                            added = true;
+                            break;
+                        }
+                    }
+                    if(!added){
+                        Meal meal = new Meal(name);
+                        addEquipment(meal);
+                        addSkills(meal);
+                        addIngredients();
+                        meal.addToQuantity(1);
+                        mealList.add(meal);
+                        //add ingredients to the ingredient that is passed to a new instance
+                    }
+                }
+
+
+                intent.putParcelableArrayListExtra("mealList", (ArrayList<? extends Parcelable>) mealList);
+                //intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
+                startActivityForResult(intent, REQUEST_CODE_ADD_RECIPE);
             }
         });
+    }
+
+    private void addIngredients(){
+        for(int i = 0; i < currentIngredients.size();i++){
+            ingredientList.add(currentIngredients.get(i));
+        }
+
+    }
+
+    private void addIngredientsQuantity(){
+        for(int i = 0; i < currentIngredients.size();i++){
+            for(int j= 0; j < ingredientList.size(); j++){
+                if(currentIngredients.get(i).getName().equals(ingredientList.get(j).getName())){
+                    ingredientList.get(j).addOneQuanity();
+                }
+            }
+        }
     }
 
     public void addEquipment(Meal meal) {

@@ -34,16 +34,26 @@ public class MealCheckout extends AppCompatActivity {
     private ListView listViewRecipe;
     private ListView listViewEquipment;
     private ListView listViewSkills;
+    private ListView listViewIngredients;
+
     private ArrayAdapter<String> adapterRecipe;
     private ArrayAdapter<String> adapterEquipment;
     private ArrayAdapter<String> adapterSkills;
-    private ArrayList<String> recipeList = new ArrayList<String>();
+    private ArrayAdapter<String> adapterIngredients;
+
     private ArrayList<Meal> mealList;
+    private ArrayList<Ingredient> ingredientList;
+    private ArrayList<Ingredient> currentIngredients;
+
+    private ArrayList<String> recipeList = new ArrayList<String>();
     private ArrayList<String> equipmentList = new ArrayList<String>();
     private ArrayList<String> skillsList = new ArrayList<String>();
-    private Button btnCheckout;
-    private ArrayList<Ingredient> ingredientList;
+    private ArrayList<String> ingredientDisplay = new ArrayList<String>();
+
     private ArrayList<String> recipeQuantity = new ArrayList<>();
+
+    private Button btnCheckout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +69,24 @@ public class MealCheckout extends AppCompatActivity {
         listViewRecipe = (ListView) findViewById(R.id.meal);
         listViewEquipment = (ListView) findViewById(R.id.equipmentList);
         listViewSkills = (ListView) findViewById(R.id.skillsList);
+        listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+
 
 
         updateRecipeList();
+        updateIngredientList();
 
         //Create list of Recipes
         adapterRecipe = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipeQuantity);
         adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
         adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
+        adapterIngredients = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, ingredientDisplay);
+
+        listViewIngredients.setAdapter(adapterIngredients);
         listViewRecipe.setAdapter(adapterRecipe);
         listViewEquipment.setAdapter(adapterEquipment);
         listViewSkills.setAdapter(adapterSkills);
 
-        ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
         //Pass recipe name on add to meal click
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +123,18 @@ public class MealCheckout extends AppCompatActivity {
                     }
                 }
             }
+        }
+    }
+
+    private void updateIngredientList(){
+        if (getIntent().getParcelableArrayListExtra("ingredientList") != null && !getIntent().getParcelableArrayListExtra("ingredientList").isEmpty()) {
+            ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
+            ingredientDisplay = new ArrayList<>();
+            for (int i = 0; i < ingredientList.size(); i++) {
+                //put into displayIngredients so that it shows up below the recipe
+                ingredientDisplay.add(ingredientList.get(i).getQuantityString() + " " + ingredientList.get(i).getName() + " " + ingredientList.get(i).getUnit());
+            }
+            Collections.sort(ingredientDisplay, String.CASE_INSENSITIVE_ORDER);
         }
     }
 
@@ -236,6 +263,44 @@ public class MealCheckout extends AppCompatActivity {
             if (toAdd != null && !skillsList.contains(toAdd)) {
                 skillsList.add(toAdd);
             }
+        }
+    }
+
+    /**
+     * Set the current ingredients for the recipes
+     */
+    private void createIngredients(){
+        currentIngredients = new ArrayList<>();
+        if (name.equals("Black Bean Hummus")) {
+            currentIngredients.add(new Ingredient(1.0, "clove", "garlic"));
+            currentIngredients.add(new Ingredient(1.0, "(15 ounce) can", "black beans"));
+            currentIngredients.add(new Ingredient(2.0, "tablespoon", "lemon juice"));
+            currentIngredients.add(new Ingredient(1.5, "tablespoon", "tahini"));
+            currentIngredients.add(new Ingredient(.75, "teaspoon", "ground cumin"));
+            currentIngredients.add(new Ingredient(.5, "teaspoon", "salt"));
+            currentIngredients.add(new Ingredient(.25, "teaspoon", "cayenne pepper"));
+            currentIngredients.add(new Ingredient(.25, "teaspoon", "paprika"));
+            currentIngredients.add(new Ingredient(10, "", "Greek olive"));
+        } else if (name.equals("Mexican Pasta")) {
+            currentIngredients.add(new Ingredient(.5, "pound", "seashell pasta"));
+            currentIngredients.add(new Ingredient(2, "tablespoon", "olive oil"));
+            currentIngredients.add(new Ingredient(2, "", "chopped onion"));
+            currentIngredients.add(new Ingredient(1, "", "chopped green bell pepper"));
+            currentIngredients.add(new Ingredient(.5, "cup", "sweet corn kernels"));
+            currentIngredients.add(new Ingredient(.5, "(15 ounce) can", "black beans"));
+            currentIngredients.add(new Ingredient(3, "(14.5 ounce) can", "peeled and diced tomatoes"));
+            currentIngredients.add(new Ingredient(.25, "cup", "salsa"));
+            currentIngredients.add(new Ingredient(.25, "cup", "sliced black olives"));
+            currentIngredients.add(new Ingredient(1.5, "tablespoon", "taco seasoning mix"));
+            currentIngredients.add(new Ingredient(0.25, "teaspoon", "salt and pepper"));
+        } else if (name.equals("French Orange Poached Pears")) {
+            currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
+            currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
+            currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
+            currentIngredients.add(new Ingredient(1, "tablespoon", "vanilla extract"));
+            currentIngredients.add(new Ingredient(2, "teaspoon", "ground cinnamon"));
+            currentIngredients.add(new Ingredient(3, "whole", "pears"));
+            currentIngredients.add(new Ingredient(.5, "cup", "chopped walnuts"));
         }
     }
 }

@@ -91,7 +91,7 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="230dp"
             android:id="@+id/ingredientList"
             android:isScrollContainer="true"
             android:layout_below="@+id/ratingBar"

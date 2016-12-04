@@ -11,6 +11,7 @@ public class Ingredient implements Parcelable {
     private String quantity;
     private String unit;
     private String name;
+    private String original;
 
     private int mData;
 
@@ -27,7 +28,8 @@ public class Ingredient implements Parcelable {
         dest.writeStringArray(new String[] {this.quantity,
                 this.quantity,
                 this.name,
-                this.unit});
+                this.unit,
+                this.original});
     }
 
 
@@ -38,6 +40,7 @@ public class Ingredient implements Parcelable {
         }
         this.name = unit;
         this.unit = name;
+        this.original = Double.toString(quantity);;
     }
 
     public String getUnit() {
@@ -60,7 +63,7 @@ public class Ingredient implements Parcelable {
         if(quantity == null){
             return 0;
         }
-        return Integer.parseInt(quantity);
+        return Double.parseDouble(quantity);
     }
 
     public String getQuantityString() {
@@ -76,14 +79,26 @@ public class Ingredient implements Parcelable {
         }
     }
 
+    public String getOriginal(){
+        return this.original;
+    }
+
+
+    public void addOneQuanity(){
+        double set = Double.parseDouble(this.quantity) + Double.parseDouble(this.original);
+        this.quantity = Double.toString(set);
+    }
+
+
     // Parcelling part
     public Ingredient(Parcel in){
-        String[] data = new String[3];
+        String[] data = new String[4];
 
         in.readStringArray(data);
         this.quantity = data[0];
         this.unit = data[1];
         this.name = data[2];
+        this.original = data[3];
     }
 
 
