@@ -80,34 +80,17 @@ public class Cooking extends AppCompatActivity {
         //btnPauseTimer = (Button) findViewById(R.id.btnPauseTimer);
 
         //set previous step to nothing
-        previousStep.setText("Previous Step");
+        //previousStep.setText();
         //set current step to first step
-        currentStep.setText("Current Step");
+        currentStep.setText(allSteps.get(0).getDescription());
         //set next step to next step
-        nextStep.setText("Next Step");
+        nextStep.setText(allSteps.get(1).getDescription());
         //set timer initial value
         timer.setText("00:00");
 
         //sets up the button and starts cooking
         startCooking();
 
-        /*
-        //directions
-        for (int i = 0; i < mealList.size(); i++) {
-            mealItems.add(setRecipeDirections(mealList.get(i).getRecipe(), mealList.get(i).getQuantity()));
-            //directionList.add(temp);
-        }
-
-        //print the directions
-        for (int i = 0; i > mealItems.size(); i++) {
-            stepsList.add(mealItems.get(0).getRecipeName() + ": " + mealItems.get(0).getDirections());
-        }
-        */
-
-        /*
-        adapterSteps = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, stepsList);
-        listViewSteps.setAdapter(adapterSteps);
-        */
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -217,7 +200,6 @@ public class Cooking extends AppCompatActivity {
                     timer1.cancel();
                     timer.setText("Timer Canceled");
                 }
-
                 if(i != allSteps.size()) {
                     btnNextStep.setText("Next Step");
                     startCooking();
@@ -331,45 +313,6 @@ public class Cooking extends AppCompatActivity {
 
 
     /**
-     * Set the directions for an individual recipe(meal item).
-     *
-     * @param recipeName
-     * @param quantity
-     */
-    /*
-
-    private MealItem setRecipeDirections(String recipeName, int quantity) {
-        MealItem meal = new MealItem();
-        if (recipeName.equals("Apple")) {
-            meal = new MealItem();
-            meal.addDirections("get apple");
-            meal.addDirections("wash apple");
-            meal.addDirections("cut apple");
-            meal.addDirections("put apple on plate");
-            meal.setQuantity(quantity);
-            meal.setRecipeName(recipeName);
-        } else if (recipeName.equals("banana")) {
-            meal = new MealItem();
-            meal.addDirections("get banana");
-            meal.addDirections("peel banana");
-            meal.addDirections("put banana in bowl");
-            meal.setQuantity(quantity);
-            meal.setRecipeName(recipeName);
-
-        } else if (recipeName.equals("grape")) {
-            meal = new MealItem();
-            meal.addDirections("pick grape");
-            meal.setQuantity(quantity);
-            meal.setRecipeName(recipeName);
-        } else {
-            System.out.println("WRONG RECIPE ENTERED FIX IT");
-        }
-
-        return meal;
-    }
-    */
-
-    /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
@@ -404,45 +347,5 @@ public class Cooking extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-    /*
-    private class MealItem {
-        ArrayList<String> directions;
-        String recipeName;
-        int quantity;
-
-        public MealItem() {
-            this.directions = new ArrayList<>();
-            this.recipeName = null;
-            this.quantity = 0;
-        }
-
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public String getRecipeName() {
-            return recipeName;
-        }
-
-        public ArrayList<String> getDirections() {
-            return directions;
-        }
-
-        public void addDirections(String direction) {
-            directions.add(direction);
-        }
-
-        public void setRecipeName(String recipeName) {
-            this.recipeName = recipeName;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-    }
-    */
-
 
 }
