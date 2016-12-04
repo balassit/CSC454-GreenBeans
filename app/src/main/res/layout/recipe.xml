@@ -5,11 +5,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:isScrollContainer="true"
     tools:context="com.example.blake.greenbeans.MainActivity"
     android:fillViewport="false">
 
@@ -30,17 +25,19 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:srcCompat="@mipmap/ic_launcher"
             android:id="@+id/imageView"
             android:layout_below="@+id/mealTitle"
             android:layout_alignLeft="@+id/mealTime"
-            android:layout_alignStart="@+id/mealTime" />
+            android:layout_alignStart="@+id/mealTime"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:text="@string/mealDescription"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="24dp"
             android:id="@+id/mealDescription"
             android:isScrollContainer="true"
@@ -49,12 +46,14 @@
             android:gravity="start"
             android:layout_below="@+id/imageView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:text="@string/minutes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="14dp"
             android:id="@+id/mealTime"
@@ -64,17 +63,17 @@
         <Button
             android:text="Add to Meal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btnAddToMeal"
             style="@style/Widget.AppCompat.Button"
             android:layout_below="@+id/mealTime"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp" />
+            android:layout_marginTop="12dp" />
 
         <TextView
             android:text="Meal Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/mealTitle"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_below="@+id/my_toolbar"
@@ -83,18 +82,33 @@
 
         <RatingBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/ratingBar"
             android:layout_below="@+id/btnAddToMeal"
             android:layout_centerHorizontal="true"
             android:clickable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ingredients"
+            android:layout_below="@+id/ratingBar"
+            android:id="@+id/ingredientText"
+            android:layout_marginTop="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:id="@+id/ingredientList"
             android:isScrollContainer="true"
-            android:layout_below="@+id/ratingBar"
+            android:layout_below="@+id/ingredientText"
             android:layout_marginTop="19dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"></ListView>

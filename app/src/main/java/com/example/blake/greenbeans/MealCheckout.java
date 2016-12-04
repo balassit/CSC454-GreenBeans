@@ -296,8 +296,10 @@ public class MealCheckout extends AppCompatActivity {
             tempIngredients.add(new Ingredient((.5), "cup", "chopped walnuts"));
         }
         for(int i = 0; i < tempIngredients.size(); i++){
-                tempIngredients.get(i).setQuantity(quant * tempIngredients.get(i).getQuantity());
-                currentIngredients.add(tempIngredients.get(i));
+            for(int j = 1; j < quant; j++){
+                tempIngredients.get(i).addOneQuanity();
+            }
+            currentIngredients.add(tempIngredients.get(i));
         }
     }
 
