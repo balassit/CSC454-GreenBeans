@@ -1,117 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.blake.greenbeans.MainActivity"
     android:fillViewport="false">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RelativeLayout">
-
     <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:text="Toolbar"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:text="@string/toolbar"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/imageView"
-            android:layout_below="@+id/mealTitle"
-            android:layout_alignLeft="@+id/mealTime"
-            android:layout_alignStart="@+id/mealTime"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:text="@string/mealDescription"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
-            android:id="@+id/mealDescription"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:isScrollContainer="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textAlignment="viewStart"
-            android:gravity="start"
-            android:layout_below="@+id/imageView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:id="@+id/RelativeLayout">
 
-        <TextView
-            android:text="@string/minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
-            android:id="@+id/mealTime"
-            android:layout_below="@+id/mealDescription"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:contentDescription="@string/meal_image"
+                android:id="@+id/imageView"
+                android:layout_below="@+id/mealTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <Button
-            android:text="Add to Meal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/btnAddToMeal"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_below="@+id/mealTime"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp" />
+            <TextView
+                android:text="@string/mealDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:id="@+id/mealDescription"
+                android:isScrollContainer="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                android:layout_below="@+id/imageView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:text="Meal Title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/mealTitle"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:layout_below="@+id/my_toolbar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:textSize="24sp" />
+            <TextView
+                android:text="@string/minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp"
+                android:id="@+id/mealTime"
+                android:layout_below="@+id/mealDescription"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/ratingBar"
-            android:layout_below="@+id/btnAddToMeal"
-            android:layout_centerHorizontal="true"
-            android:clickable="false" />
+            <Button
+                android:text="@string/add_to_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAddToMeal"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_below="@+id/mealTime"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Ingredients"
-            android:layout_below="@+id/ratingBar"
-            android:id="@+id/ingredientText"
-            android:layout_marginTop="12dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="24sp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textAlignment="center" />
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                android:layout_below="@+id/btnAddToMeal"
+                android:layout_centerHorizontal="true"
+                android:clickable="false" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:id="@+id/ingredientList"
-            android:isScrollContainer="true"
-            android:layout_below="@+id/ingredientText"
-            android:layout_marginTop="19dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"></ListView>
-    </RelativeLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                android:layout_below="@+id/ratingBar"
+                android:id="@+id/ingredientText"
+                android:layout_marginTop="12dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textAlignment="center" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:id="@+id/ingredientList"
+                android:isScrollContainer="false"
+                android:layout_below="@+id/ingredientText"
+                android:layout_marginTop="19dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+            </ListView>
+
+            <TextView
+                android:text="@string/mealTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mealTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:layout_marginTop="56dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/ratingBar"
+                android:layout_alignStart="@+id/ratingBar"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:textSize="34sp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
