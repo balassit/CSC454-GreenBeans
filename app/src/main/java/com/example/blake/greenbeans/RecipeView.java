@@ -164,7 +164,7 @@ public class RecipeView extends AppCompatActivity {
                     meal.addToQuantity(1);
                     addEquipment(meal);
                     addSkills(meal);
-                    addIngredients();
+                    //addIngredients();
                     //add ingredients to the ingredient that is passed to a new instance
                     mealList.add(meal);
                 }
@@ -173,7 +173,7 @@ public class RecipeView extends AppCompatActivity {
                     for (int i = 0; i < mealList.size(); i++) {
                         if (mealList.get(i).getRecipe().equals(name)) {
                             mealList.get(i).addToQuantity(1);
-                            addIngredientsQuantity();
+                            //addIngredientsQuantity();
                             added = true;
                             break;
                         }
@@ -182,10 +182,9 @@ public class RecipeView extends AppCompatActivity {
                         Meal meal = new Meal(name);
                         addEquipment(meal);
                         addSkills(meal);
-                        addIngredients();
+                        //addIngredients();
                         meal.addToQuantity(1);
                         mealList.add(meal);
-                        //add ingredients to the ingredient that is passed to a new instance
                     }
                 }
 
@@ -197,6 +196,7 @@ public class RecipeView extends AppCompatActivity {
         });
     }
 
+    /*
     private void addIngredients(){
         for(int i = 0; i < currentIngredients.size();i++){
             ingredientList.add(currentIngredients.get(i));
@@ -213,6 +213,7 @@ public class RecipeView extends AppCompatActivity {
             }
         }
     }
+    */
 
     public void addEquipment(Meal meal) {
         if (name.equals("Black Bean Hummus")) {

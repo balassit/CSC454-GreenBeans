@@ -32,7 +32,7 @@ public class Meal implements Parcelable {
     }
 
     public Meal(String recipe){
-        this.quantity = null;
+        this.quantity = "0";
         this.recipe = recipe;
         this.equipment = null;
         this.skills = null;
