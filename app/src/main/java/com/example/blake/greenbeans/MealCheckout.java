@@ -292,7 +292,7 @@ public class MealCheckout extends AppCompatActivity {
             tempIngredients.add(new Ingredient((.25), "cup", "white sugar"));
             tempIngredients.add(new Ingredient((1), "tablespoon", "vanilla extract"));
             tempIngredients.add(new Ingredient((2), "teaspoon", "ground cinnamon"));
-            tempIngredients.add(new Ingredient((3), "whole", "pears"));
+            tempIngredients.add(new Ingredient((3), "", "whole pear"));
             tempIngredients.add(new Ingredient((.5), "cup", "chopped walnuts"));
         }
         for(int i = 0; i < tempIngredients.size(); i++){

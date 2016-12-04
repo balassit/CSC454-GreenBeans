@@ -92,7 +92,12 @@ public class Ingredient implements Parcelable {
     }
 
     public String getDisplayString() {
-        return this.getQuantityString() + this.getUnitString() + this.getNameString();
+        if (this.unit.equals("")) {
+            return this.getQuantityString() + this.name + (quantity > 1 ? "s" : "");
+        }
+        else {
+            return this.getQuantityString() + this.getUnitString() + this.getNameString();
+        }
     }
 
 
