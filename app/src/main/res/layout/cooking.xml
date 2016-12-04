@@ -48,15 +48,6 @@
             android:layout_centerHorizontal="true"/>
             android:textSize= "25dp"
 
-        <Button
-            android:text="Next Step"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnNextStep"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_below="@+id/timer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp" />
 
 
         <TextView
@@ -72,7 +63,7 @@
             android:text="Start Meal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnStartMeal"
+            android:id="@+id/btnNextStep"
             style="@style/Widget.AppCompat.Button"
             android:layout_below="@+id/next_step"
             android:layout_centerHorizontal="true"
