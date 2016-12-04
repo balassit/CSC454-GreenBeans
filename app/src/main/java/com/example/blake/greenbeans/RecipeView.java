@@ -36,6 +36,7 @@ public class RecipeView extends AppCompatActivity {
     private ListView listViewIngredients;
     private TextView mealTitle;
     private TextView mealDescription;
+    private TextView mealTime;
     private Button btnAddToMeal;
     String name;
 
@@ -53,12 +54,17 @@ public class RecipeView extends AppCompatActivity {
                 //Set Meal title to name of recipe
         mealTitle = (TextView) findViewById(R.id.mealTitle);
         mealDescription = (TextView) findViewById(R.id.mealDescription);
+        mealTime = (TextView) findViewById(R.id.mealTime);
+
         name = getIntent().getStringExtra("name");
         mealList = getIntent().getParcelableArrayListExtra("mealList");
         mealTitle.setText(name);
 
+
         //set the text of the recipe based on which one it is
         setMealDescription();
+        //set the text of the time to cook the recipe
+        setTime();
 
         listViewIngredients = (ListView) findViewById(R.id.ingredientList);
 
@@ -293,18 +299,36 @@ public class RecipeView extends AppCompatActivity {
         Collections.sort(displayIngredients, String.CASE_INSENSITIVE_ORDER);
     }
 
+    /**
+     * Set the description for each recipe
+     */
     private void setMealDescription() {
-        String appleDescrition = "apple is red";
-        String bananaDescription = "banana is brown. do not use.";
-        String grapeDescription = "actually a grape bundle, not a single grape. What else can I put in here to make it longer than one line";
-        if (name.equals("Apple")) {
-            mealDescription.setText(appleDescrition);
+        String hummusDescrition = "apple is red";
+        String pastaDescription = "banana is brown. do not use.";
+        String pearDescription = "actually a grape bundle, not a single grape. What else can I put in here to make it longer than one line";
+        if (name.equals("Black Bean Hummus")) {
+            mealDescription.setText(hummusDescrition);
         }
-        else if(name.equals("banana")) {
-            mealDescription.setText(bananaDescription);
+        else if(name.equals("Mexican Pasta")) {
+            mealDescription.setText(pastaDescription);
         }
-        else if(name.equals("grape")) {
-            mealDescription.setText(grapeDescription);
+        else if(name.equals("French Orange Poached Pears")) {
+            mealDescription.setText(pearDescription);
+        }
+    }
+
+    private void setTime() {
+        String hummusTime = "Total Cook Time: 11 minutes";
+        String pastaTime = "Total Cook Time: 34 minutes";
+        String pearTime = "Total Cook Time: 25 mintutes";
+        if (name.equals("Black Bean Hummus")) {
+            mealTime.setText(hummusTime);
+        }
+        else if(name.equals("Mexican Pasta")) {
+            mealTime.setText(pastaTime);
+        }
+        else if(name.equals("French Orange Poached Pears")) {
+            mealTime.setText(pearTime);
         }
     }
 }
