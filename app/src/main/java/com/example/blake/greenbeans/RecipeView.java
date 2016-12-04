@@ -292,8 +292,8 @@ public class RecipeView extends AppCompatActivity {
             currentIngredients.add(new Ingredient(2, "", "chopped onion"));
             currentIngredients.add(new Ingredient(1, "", "chopped green bell pepper"));
             currentIngredients.add(new Ingredient(.5, "cup", "sweet corn kernels"));
-            currentIngredients.add(new Ingredient(.5, "(15 ounce) can", "black beans"));
-            currentIngredients.add(new Ingredient(3, "(14.5 ounce) can", "peeled and diced tomatoes"));
+            currentIngredients.add(new Ingredient(1, "(15 ounce) can", "black beans"));
+            currentIngredients.add(new Ingredient(1, "(14.5 ounce) can", "peeled and diced tomatoes"));
             currentIngredients.add(new Ingredient(.25, "cup", "salsa"));
             currentIngredients.add(new Ingredient(.25, "cup", "sliced black olives"));
             currentIngredients.add(new Ingredient(1.5, "tablespoon", "taco seasoning mix"));
@@ -320,7 +320,7 @@ public class RecipeView extends AppCompatActivity {
         displayIngredients = new ArrayList<>();
         for (int i = 0; i < currentIngredients.size(); i++) {
             //put into displayIngredients so that it shows up below the recipe
-            displayIngredients.add(currentIngredients.get(i).getQuantityString() + " " + currentIngredients.get(i).getName() + " " + currentIngredients.get(i).getUnit());
+            displayIngredients.add(currentIngredients.get(i).getDisplayString());
         }
         Collections.sort(displayIngredients, String.CASE_INSENSITIVE_ORDER);
     }
@@ -364,8 +364,7 @@ public class RecipeView extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("RecipeView Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("RecipeView Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
