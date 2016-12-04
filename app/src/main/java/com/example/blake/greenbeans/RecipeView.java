@@ -329,9 +329,9 @@ public class RecipeView extends AppCompatActivity {
      * Set the description for each recipe
      */
     private void setMealDescription() {
-        String hummusDescrition = "apple is red";
-        String pastaDescription = "banana is brown. do not use.";
-        String pearDescription = "actually a grape bundle, not a single grape. What else can I put in here to make it longer than one line";
+        String hummusDescrition = "This hummus comes with raves attached to it. Everything goes into the food processor and is swooshed into a fabulous consistency. Try it with some toasted pita bread.";
+        String pastaDescription = "Pasta tossed with a quickly cooked sauce of tomatoes, onion, bell pepper, corn, black beans, salsa and taco seasoning.";
+        String pearDescription = "Pears are simply poached in sweetened and spiced orange juice for a light, refreshing French dessert.";
         if (name.equals("Black Bean Hummus")) {
             mealDescription.setText(hummusDescrition);
         }
@@ -344,9 +344,9 @@ public class RecipeView extends AppCompatActivity {
     }
 
     private void setTime() {
-        String hummusTime = "Total Cook Time: 11 minutes";
-        String pastaTime = "Total Cook Time: 34 minutes";
-        String pearTime = "Total Cook Time: 25 mintutes";
+        String hummusTime = "Total Cook Time: 5 minutes";
+        String pastaTime = "Total Cook Time: 20 minutes";
+        String pearTime = "Total Cook Time: 1 hour 45 mintutes";
         if (name.equals("Black Bean Hummus")) {
             mealTime.setText(hummusTime);
         }
