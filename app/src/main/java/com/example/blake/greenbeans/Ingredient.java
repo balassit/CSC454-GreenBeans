@@ -78,7 +78,7 @@ public class Ingredient implements Parcelable {
                 quantityString += " 3/4 ";
             }
 
-            return quantityString + "\t\t";
+            return quantityString + " ";
         }
     }
 
