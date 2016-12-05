@@ -114,7 +114,6 @@ public class Cooking extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(Activity.RESULT_OK, intent);
                 startActivityForResult(intent, REQUEST_CODE_RECIPE_LIST);
-                //startActivity(new Intent(RecipeView.this, RecipeList.class));
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

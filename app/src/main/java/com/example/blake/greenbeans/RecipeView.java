@@ -146,7 +146,6 @@ public class RecipeView extends AppCompatActivity {
                 intent.putParcelableArrayListExtra("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-                //startActivity(new Intent(RecipeView.this, RecipeList.class));
                 return true;
 
             case R.id.checkout:
