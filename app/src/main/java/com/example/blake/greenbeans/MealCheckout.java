@@ -275,10 +275,7 @@ public class MealCheckout extends AppCompatActivity {
         System.out.println("_____________________________");
 
         ArrayList<Ingredient> tempIngredients = new ArrayList<Ingredient>();
-
         if (name.equals("Black Bean Hummus")) {
-            ImageView iv = (ImageView) findViewById(R.id.imageView);
-            iv.setImageResource(R.drawable.black_bean_hummus);
             tempIngredients.add(new Ingredient((1.0), "clove", "garlic"));
             tempIngredients.add(new Ingredient((1.0), "(15 ounce) can", "black beans"));
             tempIngredients.add(new Ingredient((2.0), "tablespoon", "lemon juice"));
@@ -289,10 +286,6 @@ public class MealCheckout extends AppCompatActivity {
             tempIngredients.add(new Ingredient((.25), "teaspoon", "paprika"));
             tempIngredients.add(new Ingredient((10), "", "Greek olive"));
         } else if (name.equals("Mexican Pasta")) {
-            ImageView iv = (ImageView) findViewById(R.id.imageView);
-            iv.setImageResource(R.drawable.mexican_pasta);
-            iv.getLayoutParams().width = 600;
-            iv.getLayoutParams().height= 600;
             tempIngredients.add(new Ingredient((.5), "pound", "seashell pasta"));
             tempIngredients.add(new Ingredient((2), "tablespoon", "olive oil"));
             tempIngredients.add(new Ingredient((2), "", "chopped onion"));
@@ -305,10 +298,6 @@ public class MealCheckout extends AppCompatActivity {
             tempIngredients.add(new Ingredient((1.5), "tablespoon", "taco seasoning mix"));
             tempIngredients.add(new Ingredient((0.25), "teaspoon", "salt and pepper"));
         } else if (name.equals("French Orange Poached Pears")) {
-            ImageView iv = (ImageView) findViewById(R.id.imageView);
-            iv.setImageResource(R.drawable.pears);
-            iv.getLayoutParams().width = 600;
-            iv.getLayoutParams().height= 600;
             tempIngredients.add(new Ingredient((1.5), "cup", "orange juice without pulp"));
             tempIngredients.add(new Ingredient((.5), "cup", "packed brown sugar"));
             tempIngredients.add(new Ingredient((.25), "cup", "white sugar"));
