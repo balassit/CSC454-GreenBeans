@@ -47,8 +47,9 @@ public class Cooking extends AppCompatActivity {
     private TextView previousStep;
     private TextView currentStep;
     private TextView nextStep;
+    private TextView currentStepTitle;
+    private TextView nextStepTitle;
     private Button btnNextStep;
-    private Button btnPauseTimer;
 
 
     /**
@@ -77,7 +78,8 @@ public class Cooking extends AppCompatActivity {
         currentStep = (TextView) findViewById(R.id.current_step);
         nextStep = (TextView) findViewById(R.id.next_step);
         btnNextStep = (Button) findViewById(R.id.btnNextStep);
-        //btnPauseTimer = (Button) findViewById(R.id.btnPauseTimer);
+        currentStepTitle = (TextView) findViewById(R.id.current);
+        nextStepTitle = (TextView) findViewById(R.id.next);
 
         //set previous step to nothing
         //previousStep.setText();
@@ -162,33 +164,29 @@ public class Cooking extends AppCompatActivity {
             //set previous step to nothing
             previousStep.setText("None");
             //set current step to first step
-            currentStep.setText(allSteps.get(i).getDescription());
+            currentStep.setText(allSteps.get(i).getMeal()+ ": \n" + allSteps.get(i).getDescription());
             //set next step to next step
-            nextStep.setText(allSteps.get(i + 1).getDescription());
+            nextStep.setText(allSteps.get(i + 1).getMeal()+ ": \n" + allSteps.get(i + 1).getDescription());
 
             //if last step
         } else if (i == (allSteps.size() - 1)) {
-            //set previous step to nothing
-            previousStep.setText(allSteps.get(i - 1).getDescription());
-            //set current step to first step
-            currentStep.setText(allSteps.get(i).getDescription());
-            //set next step to next step
-            nextStep.setText("Last Step");
-
+            enjoyTheMeal();
+            return;
         } else {
-            previousStep.setText(allSteps.get(i - 1).getDescription());
-            currentStep.setText(allSteps.get(i).getDescription());
-            nextStep.setText(allSteps.get(i + 1).getDescription());
+            previousStep.setText(allSteps.get(i - 1).getMeal()+ ": \n" + allSteps.get(i - 1).getDescription());
+            currentStep.setText(allSteps.get(i).getMeal()+ ": \n" + allSteps.get(i).getDescription());
+            nextStep.setText(allSteps.get(i + 1).getMeal()+ ": \n" + allSteps.get(i + 1).getDescription());
         }
         //set button to say Cancel Timer
         btnNextStep.setText("End Timer");
         counter = allSteps.get(i).getTime();
-        if (counter != 0){
-            startTimer();
-        } else {
+
+        if (counter == 0) {
             timer.setText("Press \"Next Step\" When Complete");
             btnNextStep.setText("Next Step");
             finish = true;
+        } else {
+            startTimer();
         }
 
         btnNextStep.setOnClickListener(new View.OnClickListener() {
@@ -196,18 +194,35 @@ public class Cooking extends AppCompatActivity {
                 i++;
                 if ((!timer.getText().equals("Finished") || !timer.getText().equals("Press \"Next Step\" When Complete")) && timer1 != null){
                     timer1.cancel();
-                    timer.setText("Timer Canceled");
+                    timer.setText("Timer Ended");
                 }
                 if(i != allSteps.size()) {
                     btnNextStep.setText("Next Step");
                     startCooking();
                 } else {
+                    timer.setText("");
                     btnNextStep.setText("Finish");
                     finishCooking();
                 }
 
             }
         });
+
+    }
+
+    private void enjoyTheMeal(){
+        //set previous step to nothing
+        previousStep.setText(allSteps.get(i - 1).getMeal()+ ": \n" + allSteps.get(i - 1).getDescription());
+        //set current step to first step
+        currentStep.setText(allSteps.get(i).getMeal()+ ": \n" + allSteps.get(i).getDescription());
+        nextStepTitle.setText("Last:");
+        timer.setText(" ");
+
+        //set next step to next step
+        nextStep.setText("Enjoy the Meal");
+        btnNextStep.setText("Finish");
+
+        finishCooking();
 
     }
 
@@ -232,6 +247,7 @@ public class Cooking extends AppCompatActivity {
 
     private void finishCooking(){
         btnNextStep = (Button) findViewById(R.id.btnNextStep);
+
 
         btnNextStep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -439,12 +455,6 @@ public class Cooking extends AppCompatActivity {
 
         meal = "French Orange Poached Pears";
         description = "Pour the syrup over the pears and toss the sauce with the pasta to serve";
-        time = 0;
-        temp = new Step(meal, description, time);
-        allSteps.add(temp);
-
-        meal = "Finish";
-        description = "Enjoy the Meal";
         time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
