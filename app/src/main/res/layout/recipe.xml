@@ -45,12 +45,21 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
+                android:text="@string/mealTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mealTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="34sp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
                 android:text="@string/mealDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:id="@+id/mealDescription"
-                android:isScrollContainer="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textAlignment="viewStart"
                 android:gravity="start"
@@ -85,14 +94,15 @@
                 android:text="@string/ingredients"
                 android:layout_below="@+id/ratingBar"
                 android:id="@+id/ingredientText"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="24sp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                style="?android:attr/listSeparatorTextViewStyle" />
 
             <ListView
                 android:layout_width="match_parent"
@@ -107,14 +117,60 @@
             </ListView>
 
             <TextView
-                android:text="@string/mealTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/mealTitle"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="34sp"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/skills"
+                android:layout_below="@+id/ingredientList"
+                android:id="@+id/skills"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textAlignment="center"
+                style="?android:attr/listSeparatorTextViewStyle" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/skillsList"
+                android:isScrollContainer="false"
+                android:layout_below="@+id/skills"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+            </ListView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/equipment"
+                android:layout_below="@+id/skillsList"
+                android:id="@+id/equipment"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textAlignment="center"
+                style="?android:attr/listSeparatorTextViewStyle" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/equipmentList"
+                android:isScrollContainer="false"
+                android:layout_below="@+id/equipment"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+            </ListView>
 
         </RelativeLayout>
 

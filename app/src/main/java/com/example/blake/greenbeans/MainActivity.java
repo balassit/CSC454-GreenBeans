@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayList() {
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, recipes);
         listView.setAdapter(adapter);
+        UIUtils.setListViewHeightBasedOnItems(listView);
         listView.setOnItemClickListener(new ItemList());
     }
 
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setRecipes(){
         listView = (ListView) findViewById(R.id.listRecipes);
+        listView.setScrollContainer(false);
         String[] items = {"Black Bean Hummus", "Mexican Pasta", "French Orange Poached Pears"};
         recipes = new ArrayList<>(Arrays.asList(items));
         Collections.sort(recipes, String.CASE_INSENSITIVE_ORDER);

@@ -17,4 +17,5 @@
     <string name="toolbar">Toolbar</string>
     <string name="add_to_meal">Add to Meal</string>
     <string name="meal_image">meal image</string>
+    <string name="previous">Previous:</string>
 </resources>

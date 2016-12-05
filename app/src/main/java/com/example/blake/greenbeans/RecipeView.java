@@ -39,11 +39,22 @@ public class RecipeView extends AppCompatActivity {
     private ArrayList<Ingredient> ingredientList;
     private ArrayList<Ingredient> currentIngredients;
     private ArrayList<String> displayIngredients = new ArrayList<String>();
+
+    private ArrayList<String> skillsList = new ArrayList<>();
+    private ArrayList<String> equipmentList = new ArrayList<>();
+
     private ArrayAdapter<String> adapterIngredients;
+    private ArrayAdapter<String> adapterSkills;
+    private ArrayAdapter<String> adapterEquipment;
+
     private ListView listViewIngredients;
+    private ListView listViewSkills;
+    private ListView listViewEquipment;
+
     private TextView mealTitle;
     private TextView mealDescription;
     private TextView mealTime;
+
     private Button btnAddToMeal;
     String name;
     /**
@@ -79,16 +90,33 @@ public class RecipeView extends AppCompatActivity {
         setTime();
 
         listViewIngredients = (ListView) findViewById(R.id.ingredientList);
+        listViewSkills = (ListView) findViewById(R.id.skillsList);
+        listViewEquipment = (ListView) findViewById(R.id.equipmentList);
+
+        listViewEquipment.setScrollContainer(false);
+        listViewSkills.setScrollContainer(false);
         listViewIngredients.setScrollContainer(false);
 
         //set the current ingredients for recipe
         createIngredients();
         //set string for ingredients
         displayIngredients();
+        //set the list of skills
+        setSkillsList();
+        //set the list of equipment
+        setEquipmentList();
+
         adapterIngredients = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, displayIngredients);
+        adapterEquipment = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, equipmentList);
+        adapterSkills = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtItem, skillsList);
+
 
         listViewIngredients.setAdapter(adapterIngredients);
         UIUtils.setListViewHeightBasedOnItems(listViewIngredients);
+        listViewSkills.setAdapter(adapterSkills);
+        UIUtils.setListViewHeightBasedOnItems(listViewSkills);
+        listViewEquipment.setAdapter(adapterEquipment);
+        UIUtils.setListViewHeightBasedOnItems(listViewEquipment);
 
         ingredientList = getIntent().getParcelableArrayListExtra("ingredientList");
 
@@ -268,6 +296,41 @@ public class RecipeView extends AppCompatActivity {
     }
 
     /**
+     * Set the list of skills for this recipe
+     */
+    public void setSkillsList() {
+        if (name.equals("Black Bean Hummus")) {
+            skillsList.add("straining and keeping liquid");
+        }
+        else if (name.equals("Mexican Pasta")) {
+            skillsList.add("cooking pasta");
+            skillsList.add("straining pasta");
+            skillsList.add("sautéing vegetables");
+        }
+        else if (name.equals("French Orange Poached Pears")) {
+            skillsList.add("poaching fruit");
+        }
+    }
+
+    /**
+     * Set the list of skills for this recipe
+     */
+    private void setEquipmentList() {
+        if (name.equals("Black Bean Hummus")) {
+            equipmentList.add("food processor");
+            equipmentList.add("spatula");
+        } else if (name.equals("Mexican Pasta")) {
+            equipmentList.add("stove");
+            equipmentList.add("large skillet");
+            equipmentList.add("large pot");
+            equipmentList.add("wooden spoon");
+        } else if (name.equals("French Orange Poached Pears")) {
+            equipmentList.add("large sauce pan");
+            equipmentList.add("large sauce pan conver");
+            equipmentList.add("wooden spoon");
+        }
+    }
+    /**
      * Set the current ingredients for the recipes
      */
     private void createIngredients() {
@@ -275,8 +338,6 @@ public class RecipeView extends AppCompatActivity {
         if (name.equals("Black Bean Hummus")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.black_bean_hummus);
-            iv.getLayoutParams().height = 700;
-            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(1.0, "clove", "garlic"));
             currentIngredients.add(new Ingredient(1.0, "(15 ounce) can", "black beans"));
             currentIngredients.add(new Ingredient(2.0, "tablespoon", "lemon juice"));
@@ -289,8 +350,6 @@ public class RecipeView extends AppCompatActivity {
         } else if (name.equals("Mexican Pasta")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.mexican_pasta);
-            iv.getLayoutParams().height = 700;
-            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(.5, "pound", "seashell pasta"));
             currentIngredients.add(new Ingredient(2, "tablespoon", "olive oil"));
             currentIngredients.add(new Ingredient(2, "", "chopped onion"));
@@ -305,8 +364,6 @@ public class RecipeView extends AppCompatActivity {
         } else if (name.equals("French Orange Poached Pears")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.pears);
-            iv.getLayoutParams().height = 700;
-            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
             currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
             currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
@@ -348,9 +405,9 @@ public class RecipeView extends AppCompatActivity {
     }
 
     private void setTime() {
-        String hummusTime = "Total Cook Time: 5 minutes";
-        String pastaTime = "Total Cook Time: 20 minutes";
-        String pearTime = "Total Cook Time: 1 hour 45 mintutes";
+        String hummusTime = "Total Time: 5 minutes";
+        String pastaTime = "Total Time: 20 minutes";
+        String pearTime = "Total Time: 1 hour 45 mintutes";
         if (name.equals("Black Bean Hummus")) {
             mealTime.setText(hummusTime);
         }
