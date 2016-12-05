@@ -18,4 +18,5 @@
     <string name="add_to_meal">Add to Meal</string>
     <string name="meal_image">meal image</string>
     <string name="previous">Previous:</string>
+    <string name="current">Current:</string>
 </resources>
