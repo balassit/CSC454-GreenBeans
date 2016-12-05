@@ -125,8 +125,7 @@ public class Cooking extends AppCompatActivity {
     private int i = 0;
     private int counter = 10;
     private CountDownTimer timer1;
-    private boolean finish;
-    private boolean noTimer;
+    private boolean finish = false;
 
     private void startCooking() {
         btnNextStep = (Button) findViewById(R.id.btnNextStep);
@@ -184,7 +183,6 @@ public class Cooking extends AppCompatActivity {
         //set button to say Cancel Timer
         btnNextStep.setText("End Timer");
         counter = allSteps.get(i).getTime();
-        noTimer = false;
         if (counter != 0){
             startTimer();
         } else {
@@ -196,7 +194,7 @@ public class Cooking extends AppCompatActivity {
         btnNextStep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 i++;
-                if (!timer.getText().equals("Finished") || !timer.getText().equals("Press \"Next Step\" When Complete")){
+                if ((!timer.getText().equals("Finished") || !timer.getText().equals("Press \"Next Step\" When Complete")) && timer1 != null){
                     timer1.cancel();
                     timer.setText("Timer Canceled");
                 }
@@ -262,50 +260,192 @@ public class Cooking extends AppCompatActivity {
         String meal;
         Step temp;
 
-        //NOT SURE IF THIS WILL REFERENCE TEMP AND CHANGE IT EACH TIME
-        //BLAKE CARTER LOOK AT THIS
-        //ALSO THIS IS HARD CODING HELL hahahahaha
-
-        meal = "Black Bean Hummus";
-        description = "first Step Description";
-        time = 10;
+        meal = "French Orange Poached Pears";
+        description = "Warm up the saucepan on the stove to medium heat";
+        time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
-        meal = "Black Bean Hummus";
-        description = "first Step Description";
+
+        meal = "French Orange Poached Pears";
+        description = "Add 1 1/2 cup of orange juice, 1/2 cup brown sugar, 1/4 cup of sugar," +
+                " 1 tablespoon of vanilla extract, and 2 teaspoons of ground cinamon to the saucepan";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Bring the mixture to a boil, stirring to dissolve the sugar.";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Place pears in the saucepan, then cover the saucepan.";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait until the timer is complete, then spoon the sauce over the pears";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait unitl the timer is complete, then spoon the sauce over the pears.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait unitl the timer is complete, then spoon the sauce over the pears.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait until the timer is complete, then turn over the pears and spoon the sauce over them.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait until the timer is complete, then spoon the sauce over the pears";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait unitl the timer is complete, then spoon the sauce over the pears.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait unitl the timer is complete, then spoon the sauce over the pears.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Wait until the timer is complete, then turn over the pears and spoon the sauce over them.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Mexican Pasta";
+        description = "Grab another pot and bring the water to a boil for the pasta";
         time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
         meal = "Mexican Pasta";
-        description = "Second Step Description";
-        time = 20;
+        description = "Add the pasta and cook until the timer is done";
+        time = 480;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Mexican Pasta";
+        description = "Drain the pasta and keep in the strainer for now";
+        time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
         meal = "French Orange Poached Pears";
-        description = "Thrid Step Description";
-        time = 30;
+        description = "Wait unitl the timer is complete, then spoon the sauce over the pears.";
+        time = 600;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Black Bean Hummus";
+        description = "Mince 1 clove of garlic in the bowl of a food processor";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Black Bean Hummus";
+        description = "add 1 can of black beans and half of their reserved liquid in the food processor";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Black Bean Hummus";
+        description = "add of 2 tablespoons of lemon juice, 1 1/2 tablespoon of tahini, 3/4 teaspoon" +
+                " of ground cumin, 1/2 teaspoon of salt, and 1/4 teaspoon of cayenne pepper";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Black Bean Hummus";
+        description = "use the food processor to process until smooth, scraping down the sides as needed.";
+        time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
 
         meal = "Black Bean Hummus";
-        description = "Fourth Step Description";
-        time = 40;
+        description = "Transfer the Black Bean Hummus to a bowl and garnish with paprika and greek olives";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+
+        meal = "French Orange Poached Pears";
+        description = "Transfer the pears to individual serving dishes, while continuing to cook the syrup";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+
+        meal = "Mexican Pasta";
+        description = "Warm up olive oil over medium heat in a larger skillet";
+        time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
         meal = "Mexican Pasta";
-        description = "Fifth Step Description";
-        time = 50;
+        description = "put onions and peppers in the large skillet";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+
+        meal = "Mexican Pasta and Pears";
+        description = "Stir the syrup from the pears often, stir the onions and peppers occasionally";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Mexican Pasta";
+        description = "In the large skillet stir in 1/2 cup of sweet corn kernels, 1 can of black beans," +
+                " 1 can of peeled and diced tomatoes, 1/4 cup of salsa, 1 1/2 tablespoon of taco seasoning," +
+                " 1/4 teaspoon of salt, and 1/4 teaspoon of pepper";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Mexican Pasta and Pears";
+        description = "Stir the pears syrup often, stir the pasta occasionally";
+        time = 300;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
         meal = "French Orange Poached Pears";
-        description = "Sixth Step Description";
-        time = 60;
+        description = "Mix walnuts into the pears syrup";
+        time = 30;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "French Orange Poached Pears";
+        description = "Pour the syrup over the pears and toss the sauce with the pasta to serve";
+        time = 0;
+        temp = new Step(meal, description, time);
+        allSteps.add(temp);
+
+        meal = "Finish";
+        description = "Enjoy the Meal";
+        time = 0;
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
