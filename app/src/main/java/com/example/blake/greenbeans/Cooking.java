@@ -84,9 +84,9 @@ public class Cooking extends AppCompatActivity {
         //set previous step to nothing
         //previousStep.setText();
         //set current step to first step
-        currentStep.setText(allSteps.get(0).getDescription());
+        currentStep.setText(allSteps.get(0).getMeal() + allSteps.get(0).getDescription());
         //set next step to next step
-        nextStep.setText(allSteps.get(1).getDescription());
+        nextStep.setText(allSteps.get(1).getMeal() + allSteps.get(1).getDescription());
         //set timer initial value
         timer.setText("00:00");
 
@@ -427,7 +427,7 @@ public class Cooking extends AppCompatActivity {
         allSteps.add(temp);
 
 
-        meal = "Mexican Pasta and Pears";
+        meal = "Mexican Pasta & French Orange Poached Pears";
         description = "Stir the syrup from the pears often, stir the onions and peppers occasionally";
         time = 0;
         temp = new Step(meal, description, time);
@@ -441,7 +441,7 @@ public class Cooking extends AppCompatActivity {
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
-        meal = "Mexican Pasta and Pears";
+        meal = "Mexican Pasta & French Orange Poached Pears";
         description = "Stir the pears syrup often, stir the pasta occasionally";
         time = 300;
         temp = new Step(meal, description, time);
@@ -453,7 +453,7 @@ public class Cooking extends AppCompatActivity {
         temp = new Step(meal, description, time);
         allSteps.add(temp);
 
-        meal = "French Orange Poached Pears";
+        meal = "Mexican Pasta & French Orange Poached Pears";
         description = "Pour the syrup over the pears and toss the sauce with the pasta to serve";
         time = 0;
         temp = new Step(meal, description, time);
