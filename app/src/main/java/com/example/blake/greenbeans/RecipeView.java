@@ -364,6 +364,8 @@ public class RecipeView extends AppCompatActivity {
         } else if (name.equals("French Orange Poached Pears")) {
             ImageView iv = (ImageView)findViewById(R.id.imageView);
             iv.setImageResource(R.drawable.pears);
+            iv.getLayoutParams().height = 700;
+            iv.getLayoutParams().width = 1080;
             currentIngredients.add(new Ingredient(1.5, "cup", "orange juice without pulp"));
             currentIngredients.add(new Ingredient(.5, "cup", "packed brown sugar"));
             currentIngredients.add(new Ingredient(.25, "cup", "white sugar"));
