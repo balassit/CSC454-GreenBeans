@@ -25,11 +25,6 @@
 
         <!-- this activity enables the search dialog to initiate searches
              in the SearchableActivity -->
-        <activity android:name=".RecipeList" >
-        <!-- enable the search dialog to send searches to SearchableActivity -->
-        <meta-data android:name="android.app.default_searchable"
-            android:value=".SearchableActivity" />
-        </activity>
 
         <activity android:name=".RecipeView" >
             </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -13,26 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:text="@string/toolbar"
-        android:background="@color/GreenBean"
+        android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:isScrollContainer="true"
-            android:id="@+id/RelativeLayout">
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/listRecipes"
-                    android:layout_below="@+id/search">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:isScrollContainer="true"
+        android:id="@+id/RelativeLayout"
+        android:layout_marginTop="52dp">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/listRecipes">
 
-                </ListView>
-        </RelativeLayout>
+        </ListView>
+    </RelativeLayout>
 </RelativeLayout>
